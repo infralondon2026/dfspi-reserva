@@ -1,5 +1,4 @@
 -- DFSPI reservation MVP — run in a new Supabase project.
-create extension if not exists pgcrypto;
 
 create type public.reservation_status as enum ('confirmada','lista_para_retirar','retirada','cancelada','vencida');
 create type public.app_role as enum ('content_manager','operations','admin');
@@ -84,7 +83,9 @@ begin
   if variant.id is null or product.id is null or (item->>'quantity')::int<1 or inv.available<(item->>'quantity')::int then raise exception 'insufficient_stock'; end if;
   total:=total+product.price_usd*(item->>'quantity')::int;
  end loop;
- new_code:='IGZ-'||upper(substr(encode(gen_random_bytes(5),'hex'),1,4))||'-'||upper(substr(encode(gen_random_bytes(5),'hex'),1,4));
+ -- md5(gen_random_uuid()) avoids depending on pgcrypto, which Supabase installs
+ -- outside this function's search_path.
+ new_code:='IGZ-'||upper(substr(md5(gen_random_uuid()::text),1,4))||'-'||upper(substr(md5(gen_random_uuid()::text),1,4));
  insert into reservations(code,customer_name,customer_email,customer_phone,pickup_date,expires_at,locale,total_usd)
  -- expires_at = end of the pickup day in -03:00, consistent with the frontend demo store.
  values(new_code,customer->>'name',lower(customer->>'email'),customer->>'phone',pickup_date,(pickup_date::text||' 23:59:59-03')::timestamptz,locale,total) returning * into r;
