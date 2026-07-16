@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vinext dev",
-    "build": "tsc -b && vinext build && node scripts/prepare-sites.mjs",
-    "preview": "vinext start",
+    "dev": "vite --config vite.spa.config.ts",
+    "build": "tsc -b && vite build --config vite.spa.config.ts && node scripts/prepare-sites.mjs",
+    "preview": "vite preview --config vite.spa.config.ts",
     "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
