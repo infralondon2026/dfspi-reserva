@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.spa.config.ts",
     "build": "tsc -b && vite build --config vite.spa.config.ts && node scripts/prepare-sites.mjs",
+    "build:pages": "tsc -b && vite build --config vite.spa.config.ts && node scripts/prepare-pages.mjs",
     "preview": "vite preview --config vite.spa.config.ts",
     "test": "vitest run --config vitest.config.ts"
   },
