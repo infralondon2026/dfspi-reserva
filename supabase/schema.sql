@@ -73,7 +73,8 @@ create or replace function public.create_reservation(customer jsonb,pickup_date 
 returns jsonb language plpgsql security definer set search_path=public as $$
 declare r reservations; item jsonb; inv inventory; variant product_variants; product products; total numeric:=0; new_code text;
 begin
- if locale not in ('es','pt') or pickup_date <= current_date or pickup_date > current_date+7 then raise exception 'invalid_request'; end if;
+ -- Validate against the store's local calendar (America/Argentina/Buenos_Aires), not the server's UTC date.
+ if locale not in ('es','pt') or pickup_date <= (now() at time zone 'America/Argentina/Buenos_Aires')::date or pickup_date > (now() at time zone 'America/Argentina/Buenos_Aires')::date+7 then raise exception 'invalid_request'; end if;
  if jsonb_array_length(items)=0 or jsonb_array_length(items)>25 then raise exception 'invalid_items'; end if;
  if coalesce(customer->>'name','')='' or coalesce(customer->>'email','')='' or coalesce(customer->>'phone','')='' then raise exception 'invalid_customer'; end if;
  for item in select * from jsonb_array_elements(items) loop
@@ -85,7 +86,8 @@ begin
  end loop;
  new_code:='IGZ-'||upper(substr(encode(gen_random_bytes(5),'hex'),1,4))||'-'||upper(substr(encode(gen_random_bytes(5),'hex'),1,4));
  insert into reservations(code,customer_name,customer_email,customer_phone,pickup_date,expires_at,locale,total_usd)
- values(new_code,customer->>'name',lower(customer->>'email'),customer->>'phone',pickup_date,(pickup_date+1)::timestamptz,locale,total) returning * into r;
+ -- expires_at = end of the pickup day in -03:00, consistent with the frontend demo store.
+ values(new_code,customer->>'name',lower(customer->>'email'),customer->>'phone',pickup_date,(pickup_date::text||' 23:59:59-03')::timestamptz,locale,total) returning * into r;
  for item in select * from jsonb_array_elements(items) loop
   select v.* into variant from product_variants v where v.id=(item->>'variant_id')::uuid;
   select p.* into product from products p where p.id=variant.product_id;
@@ -101,11 +103,36 @@ grant execute on function public.create_reservation(jsonb,date,jsonb,text) to an
 create or replace function public.release_reservation_stock(reservation_id uuid,new_status reservation_status)
 returns void language plpgsql security definer set search_path=public as $$
 declare current reservations; begin
+ if not public.is_admin() then raise exception 'not_authorized'; end if;
  select * into current from reservations where id=reservation_id for update;
  if current.status in ('cancelada','vencida','retirada') then return; end if;
  if new_status in ('cancelada','vencida') then update inventory i set available=i.available+ri.quantity,updated_at=now() from reservation_items ri where ri.reservation_id=current.id and ri.variant_id=i.variant_id; end if;
  update reservations set status=new_status,updated_at=now() where id=current.id;
 end $$;
+revoke all on function public.release_reservation_stock(uuid, reservation_status) from public;
+grant execute on function public.release_reservation_stock(uuid, reservation_status) to authenticated;
+
+-- Public reservation lookup by code + email (the only anon path into reservations).
+create or replace function public.get_reservation(lookup_code text,lookup_email text)
+returns jsonb language plpgsql stable security definer set search_path=public as $$
+declare r reservations; result jsonb; begin
+ select * into r from reservations
+  where upper(code)=upper(trim(lookup_code)) and lower(customer_email)=lower(trim(lookup_email));
+ if r.id is null then return null; end if;
+ select jsonb_build_object(
+  'id',r.id,'code',r.code,'customer_name',r.customer_name,'customer_email',r.customer_email,
+  'customer_phone',r.customer_phone,'pickup_date',r.pickup_date,'expires_at',r.expires_at,
+  'created_at',r.created_at,'status',r.status,'locale',r.locale,'total_usd',r.total_usd,
+  'items',coalesce((select jsonb_agg(jsonb_build_object('variant_id',ri.variant_id,'quantity',ri.quantity,'unit_price_usd',ri.unit_price_usd,'product_snapshot',ri.product_snapshot))
+   from reservation_items ri where ri.reservation_id=r.id),'[]'::jsonb)
+ ) into result;
+ return result;
+end $$;
+revoke all on function public.get_reservation(text,text) from public;
+grant execute on function public.get_reservation(text,text) to anon,authenticated;
+
+-- Admins (and only they) need to read their own membership row after sign-in.
+create policy "read own admin row" on public.admin_users for select using(auth.uid()=user_id);
 
 create index reservations_lookup on public.reservations(code,lower(customer_email));
 create index reservations_expiry on public.reservations(expires_at) where status='confirmada';

@@ -1,0 +1,430 @@
+/* ===========================================================================
+   DFSPI — enhancement layer on top of styles.css
+   Scroll experience, new home sections and loading states.
+   =========================================================================== */
+
+/* --- Scroll progress & header state --------------------------------------- */
+
+.scroll-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.header.scrolled {
+  box-shadow: 0 10px 30px rgba(7, 28, 54, 0.09);
+}
+
+/* --- Reveal-on-scroll ------------------------------------------------------ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-media img {
+    animation: none !important;
+  }
+  .brand-track {
+    animation: none !important;
+  }
+}
+
+/* --- Hero motion ------------------------------------------------------------ */
+
+.hero-media img {
+  animation: hero-zoom 12s ease-out forwards;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* --- Category showcase ------------------------------------------------------ */
+
+.category-section .section-head {
+  margin-bottom: 42px;
+}
+
+.category-showcase {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.category-card {
+  position: relative;
+  display: block;
+  height: 340px;
+  overflow: hidden;
+  background: var(--navy);
+  border-radius: 3px;
+}
+
+.category-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.06);
+  opacity: 0.55;
+}
+
+.category-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 22px;
+  color: #fff;
+  background: linear-gradient(180deg, transparent, rgba(6, 23, 45, 0.92) 55%);
+}
+
+.category-copy h3 {
+  margin: 0 0 6px;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.category-copy p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #d4dde7;
+  min-height: 34px;
+}
+
+.category-copy span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+
+/* --- Stats band -------------------------------------------------------------- */
+
+.stats-band {
+  background: var(--navy);
+  color: #fff;
+  padding: 64px max(5vw, 24px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  text-align: center;
+}
+
+.stat-item strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 600;
+  color: var(--gold-2);
+  line-height: 1.1;
+}
+
+.stat-item span {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b9c6d4;
+}
+
+/* --- Brand marquee ------------------------------------------------------------ */
+
+.brand-marquee {
+  border-block: 1px solid var(--line);
+  padding: 34px 0 30px;
+  background: #fff;
+  text-align: center;
+}
+
+.brand-marquee > .kicker {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.brand-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.brand-track {
+  display: flex;
+  gap: 64px;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.brand-track span {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--navy-2);
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Testimonials --------------------------------------------------------------- */
+
+.testimonials {
+  background: var(--cream);
+}
+
+.testimonials .section-head {
+  margin-bottom: 42px;
+}
+
+.testimonial-grid {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.testimonial-card {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 30px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.testimonial-card svg {
+  color: var(--gold);
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  flex: 1;
+}
+
+.testimonial-card figcaption {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* --- Visit section extras ---------------------------------------------------------- */
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Final CTA band -------------------------------------------------------------------- */
+
+.cta-band {
+  background: linear-gradient(135deg, #06172d, #123a63);
+  color: #fff;
+  text-align: center;
+  padding: 96px max(5vw, 24px);
+}
+
+.cta-band h2 {
+  margin: 0 0 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4.2vw, 44px);
+  font-weight: 600;
+}
+
+.cta-band p {
+  margin: 0 auto 30px;
+  max-width: 520px;
+  color: #c6d2de;
+  font-size: 16px;
+}
+
+/* --- Back to top ------------------------------------------------------------------------- */
+
+.back-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 90px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 69;
+  box-shadow: 0 8px 24px rgba(7, 28, 54, 0.16);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.back-to-top:hover {
+  background: var(--cream);
+  transform: translateY(-2px);
+}
+
+/* --- Sort control in catalog ----------------------------------------------------------------- */
+
+.sort-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sort-select select {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 8px 10px;
+  border-radius: 2px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* --- Loading skeletons -------------------------------------------------------------------------- */
+
+.skeleton-card .product-image,
+.skeleton-box {
+  background: linear-gradient(90deg, #eef1f4 25%, #f7f9fa 50%, #eef1f4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  min-height: 240px;
+}
+
+.skeleton-line {
+  display: block;
+  height: 13px;
+  margin: 10px 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #eef1f4 25%, #f7f9fa 50%, #eef1f4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line.w40 {
+  width: 40%;
+}
+
+.skeleton-line.w60 {
+  width: 60%;
+}
+
+.skeleton-line.w80 {
+  width: 80%;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* --- Footer contact rows --------------------------------------------------------------------------- */
+
+.footer-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0 0 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.footer-contact svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--gold);
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* --- Responsive ------------------------------------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .category-showcase {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-band {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 48px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-showcase {
+    grid-template-columns: 1fr;
+  }
+  .category-card {
+    height: 280px;
+  }
+  .stat-item strong {
+    font-size: 40px;
+  }
+  .back-to-top {
+    right: 12px;
+    bottom: 148px;
+  }
+}
