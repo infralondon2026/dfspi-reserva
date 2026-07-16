@@ -4,28 +4,31 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/prepare-sites.mjs",
-    "preview": "vite preview",
-    "test": "vitest run"
+    "dev": "vinext dev",
+    "build": "tsc -b && vinext build && node scripts/prepare-sites.mjs",
+    "preview": "vinext start",
+    "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.52.0",
+    "@vitejs/plugin-rsc": "^0.5.27",
     "lucide-react": "^0.468.0",
     "qrcode.react": "^4.2.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3"
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.6.3",
+    "react-server-dom-webpack": "^19.2.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
+    "@vitejs/plugin-react": "^6.0.3",
     "jsdom": "^26.1.0",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4",
+    "vinext": "^0.1.8",
+    "vite": "^8.1.5",
     "vitest": "^3.2.4"
   }
 }
