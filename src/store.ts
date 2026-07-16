@@ -1,0 +1,13 @@
+import { products as seedProducts } from './data'
+import type { CartItem, Locale, Product, Reservation, ReservationStatus } from './types'
+
+const PRODUCT_KEY='dfspi-products-v1', RESERVATION_KEY='dfspi-reservations-v1'
+export const getProducts=():Product[]=>{try{return JSON.parse(localStorage.getItem(PRODUCT_KEY)||'null')||seedProducts}catch{return seedProducts}}
+export const saveProducts=(items:Product[])=>localStorage.setItem(PRODUCT_KEY,JSON.stringify(items))
+export const getReservations=():Reservation[]=>{try{return JSON.parse(localStorage.getItem(RESERVATION_KEY)||'[]')}catch{return[]}}
+export const saveReservations=(items:Reservation[])=>localStorage.setItem(RESERVATION_KEY,JSON.stringify(items))
+const code=()=>`IGZ-${Math.random().toString(36).slice(2,6).toUpperCase()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`
+export function expireReservations(){const now=Date.now(),rs=getReservations(),ps=getProducts();let dirty=false;rs.forEach(r=>{if(r.status==='confirmada'&&new Date(r.expiresAt).getTime()<now){r.status='vencida';r.items.forEach(i=>{const p=ps.find(x=>x.id===i.productId);if(p)p.stock+=i.quantity});dirty=true}});if(dirty){saveReservations(rs);saveProducts(ps)}}
+export function createReservation(customer:Reservation['customer'],pickupDate:string,items:CartItem[],locale:Locale){expireReservations();const ps=getProducts();for(const item of items){const p=ps.find(x=>x.id===item.productId);if(!p||item.quantity<1||item.quantity>p.stock)throw new Error('stock')}const total=items.reduce((s,i)=>s+(ps.find(p=>p.id===i.productId)?.price||0)*i.quantity,0);items.forEach(i=>{const p=ps.find(x=>x.id===i.productId)!;p.stock-=i.quantity});const expiresAt=new Date(`${pickupDate}T23:59:59-03:00`).toISOString();const reservation:Reservation={code:code(),customer,pickupDate,expiresAt,createdAt:new Date().toISOString(),status:'confirmada',items,locale,total};saveProducts(ps);saveReservations([reservation,...getReservations()]);return reservation}
+export const findReservation=(code:string,email:string)=>{expireReservations();return getReservations().find(r=>r.code.toLowerCase()===code.trim().toLowerCase()&&r.customer.email.toLowerCase()===email.trim().toLowerCase())}
+export function setReservationStatus(code:string,status:ReservationStatus){const rs=getReservations(),r=rs.find(x=>x.code===code);if(!r)return;const previous=r.status;if((status==='cancelada'||status==='vencida')&&!['cancelada','vencida','retirada'].includes(previous)){const ps=getProducts();r.items.forEach(i=>{const p=ps.find(x=>x.id===i.productId);if(p)p.stock+=i.quantity});saveProducts(ps)}r.status=status;saveReservations(rs)}
