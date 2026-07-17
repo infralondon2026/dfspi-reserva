@@ -1,4 +1,5 @@
 import { Clock3 } from 'lucide-react'
+import { resolveImage } from '../assets'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { Reservation, ReservationStatus } from '../types'
 
@@ -29,7 +30,7 @@ export default function ReservationView({ reservation }: { reservation: Reservat
         if (!product) return null
         return (
           <div className="mini-item" key={item.productId}>
-            <img src={product.image} alt={product.name} />
+            <img src={resolveImage(product.image)} alt={product.name} />
             <span>
               {product.brand}
               <b>{product.name}</b>

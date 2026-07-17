@@ -1,8 +1,15 @@
-export const logo =
-  'https://dutyfreeshoppuertoiguazu.com/wp-content/uploads/2025/02/Logo-DFSPI_CON-FONDO-2.png'
+/** Resolves a public/ asset path against the deploy base (/, /dfspi-reserva/, etc.). */
+export const asset = (path: string) => import.meta.env.BASE_URL + path
 
-export const hero =
-  'https://dutyfreeshoppuertoiguazu.com/wp-content/uploads/2026/02/VPN_AC_Model_Key_Visual_1500×500_26SS-1.jpg'
+/**
+ * Product images are stored as paths relative to the site root (e.g. "img/ch-212.jpeg")
+ * so they survive domain/base changes; absolute URLs pass through untouched.
+ */
+export const resolveImage = (url: string) => (url.startsWith('http') ? url : asset(url))
+
+export const logo = asset('img/logo.png')
+
+export const hero = asset('img/hero.jpg')
 
 export const storeAddress = 'Ruta Nacional 12, km 1645,5'
 export const storeCity = 'Puerto Iguazú, Misiones'

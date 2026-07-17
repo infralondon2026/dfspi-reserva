@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { ArrowRight, Clock3, LockKeyhole, PackageCheck, ShoppingBag } from 'lucide-react'
-import { logo } from '../assets'
+import { logo, resolveImage } from '../assets'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { AdminSession, Product, Reservation, ReservationStatus } from '../types'
 
@@ -184,7 +184,7 @@ export default function Admin() {
           <div className="admin-products">
             {products.map(product => (
               <div key={product.id}>
-                <img src={product.image} alt={product.name} />
+                <img src={resolveImage(product.image)} alt={product.name} />
                 <span>
                   <small>{product.brand}</small>
                   <b>{product.name}</b>

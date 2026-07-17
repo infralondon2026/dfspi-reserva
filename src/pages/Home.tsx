@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Clock3, MapPin, PackageCheck, Quote, ShieldCheck } from 'lucide-react'
-import { hero, mapsUrl, storeAddress, storeCity } from '../assets'
+import { hero, mapsUrl, resolveImage, storeAddress, storeCity } from '../assets'
 import FaqSection from '../components/FaqSection'
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard'
 import Reveal from '../components/Reveal'
@@ -109,7 +109,7 @@ function CategoryShowcase() {
           <Reveal key={card.category} delay={index * 90}>
             <Link to={`/catalogo?cat=${card.category}`} className="category-card">
               {imageFor(card.category) && (
-                <img src={imageFor(card.category)} alt={tr(card.category)} loading="lazy" />
+                <img src={resolveImage(imageFor(card.category)!)} alt={tr(card.category)} loading="lazy" />
               )}
               <div className="category-copy">
                 <h3>{tr(card.category)}</h3>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Minus, Plus, ShieldCheck, ShoppingBag, Trash2 } from 'lucide-react'
+import { resolveImage } from '../assets'
 import { useCart, useLocale, useStoreData } from '../context/AppContext'
 
 export default function CartPage() {
@@ -35,7 +36,7 @@ export default function CartPage() {
         <div className="cart-items">
           {items.map(item => (
             <div className="cart-row" key={item.productId}>
-              <img src={item.product.image} alt={item.product.name} />
+              <img src={resolveImage(item.product.image)} alt={item.product.name} />
               <div className="cart-product">
                 <small>{item.product.brand}</small>
                 <h3>{item.product.name}</h3>

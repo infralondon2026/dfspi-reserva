@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, Heart, Plus } from 'lucide-react'
+import { resolveImage } from '../assets'
 import { useCart, useLocale } from '../context/AppContext'
 import type { Product } from '../types'
 
@@ -20,7 +21,7 @@ export default function ProductCard({ product }: { product: Product }) {
     <article className="product-card">
       <div className="product-image">
         <Link to={`/producto/${product.id}`}>
-          <img src={product.image} alt={`${product.brand} ${product.name}`} loading="lazy" />
+          <img src={resolveImage(product.image)} alt={`${product.brand} ${product.name}`} loading="lazy" />
         </Link>
         {product.originalPrice && (
           <span className="sale">-{Math.round((1 - product.price / product.originalPrice) * 100)}%</span>

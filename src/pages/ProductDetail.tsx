@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Clock3, Minus, Plus, ShieldCheck, ShoppingBag } from 'lucide-react'
+import { resolveImage } from '../assets'
 import { useCart, useLocale, useStoreData } from '../context/AppContext'
 import NotFound from './NotFound'
 
@@ -35,7 +36,7 @@ export default function ProductDetail() {
       </button>
       <div className="detail-grid">
         <div className="detail-image">
-          <img src={product.image} alt={`${product.brand} ${product.name}`} />
+          <img src={resolveImage(product.image)} alt={`${product.brand} ${product.name}`} />
         </div>
         <div className="detail-copy">
           <span className="brand-name">{product.brand}</span>
