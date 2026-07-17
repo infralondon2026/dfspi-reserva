@@ -6,3 +6,5 @@ spa-dist
 .env.local
 *.log
 *.tsbuildinfo
+*.docx
+*.pdf
