@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Clock3, MapPin, PackageCheck, Quote, ShieldCheck, Tag } from 'lucide-react'
 import { hero, mapsUrl, resolveImage, storeAddress, storeCity } from '../assets'
+import BankPromos from '../components/BankPromos'
 import FaqSection from '../components/FaqSection'
+import Newsletter from '../components/Newsletter'
+import PaymentMethods from '../components/PaymentMethods'
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard'
 import Reveal from '../components/Reveal'
+import Services from '../components/Services'
 import StoreMap from '../components/StoreMap'
+import StoreNews from '../components/StoreNews'
 import { RESERVAS_ENABLED } from '../config'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { UiKey } from '../i18n'
@@ -16,15 +21,19 @@ export default function Home() {
       <Hero />
       <TrustStrip />
       <CategoryShowcase />
+      <BankPromos />
       <OffersSection />
+      <StoreNews />
       <FeaturedSection />
       <StoreMap />
       <BrandMarquee />
+      <Services />
+      <PaymentMethods />
       {RESERVAS_ENABLED && <HowSection />}
       <Testimonials />
       <FaqSection />
       <VisitSection />
-      <CtaBand />
+      <Newsletter />
     </>
   )
 }
@@ -307,17 +316,3 @@ function VisitSection() {
   )
 }
 
-function CtaBand() {
-  const { tr } = useLocale()
-  return (
-    <section className="cta-band">
-      <Reveal>
-        <h2>{tr('ctaTitle')}</h2>
-        <p>{tr('ctaBody')}</p>
-        <Link to="/catalogo" className="button gold">
-          {tr('ctaButton')} <ArrowRight size={18} />
-        </Link>
-      </Reveal>
-    </section>
-  )
-}

@@ -9,7 +9,7 @@ type Result = { data: unknown; error: { message: string } | null }
 function queryBuilder(result: Result) {
   const builder: Record<string, unknown> = {}
   const chain = () => builder
-  for (const method of ['select', 'eq', 'order', 'update', 'maybeSingle', 'single']) {
+  for (const method of ['select', 'eq', 'order', 'update', 'upsert', 'maybeSingle', 'single']) {
     builder[method] = vi.fn(chain)
   }
   builder.then = (resolve: (value: Result) => unknown) => Promise.resolve(result).then(resolve)
@@ -227,6 +227,23 @@ describe('supabase adapter', () => {
     })
     const session = await createSupabaseAdapter(client).signIn('ops@dfspi.com', 'secret')
     expect(session).toEqual({ email: 'ops@dfspi.com', role: 'operations' })
+  })
+
+  it('subscribes to the newsletter via the subscribers table', async () => {
+    const { client, from } = mockClient({
+      tables: { newsletter_subscribers: { data: null, error: null } },
+    })
+    await createSupabaseAdapter(client).subscribeNewsletter('  Foo@Example.com ', 'es')
+    expect(from).toHaveBeenCalledWith('newsletter_subscribers')
+  })
+
+  it('rejects newsletter signup when the table write fails', async () => {
+    const { client } = mockClient({
+      tables: { newsletter_subscribers: { data: null, error: { message: 'db down' } } },
+    })
+    await expect(
+      createSupabaseAdapter(client).subscribeNewsletter('foo@example.com', 'pt'),
+    ).rejects.toThrow('db down')
   })
 
   it('updates reservation status through release_reservation_stock', async () => {

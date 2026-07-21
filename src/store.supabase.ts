@@ -235,5 +235,12 @@ export function createSupabaseAdapter(client: SupabaseClient): StoreAdapter {
         .eq('variant_id', productId)
       if (error) throw new Error(error.message)
     },
+
+    async subscribeNewsletter(email, locale) {
+      const { error } = await client
+        .from('newsletter_subscribers')
+        .upsert({ email: email.trim().toLowerCase(), locale }, { onConflict: 'email' })
+      if (error) throw new Error(error.message)
+    },
   }
 }

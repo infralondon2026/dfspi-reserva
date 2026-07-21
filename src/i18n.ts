@@ -248,6 +248,39 @@ export const ui = {
     companyOf: 'Una empresa de',
     backToTop: 'Volver arriba',
     pageNotFound: 'Página no encontrada',
+
+    // Métodos de pago
+    payKicker: 'MEDIOS DE PAGO',
+    payTitle: 'Pagá como más te convenga',
+    payBody: 'Aceptamos las principales tarjetas y efectivo en tres monedas.',
+
+    // Promociones bancarias
+    promoKicker: 'PROMOCIONES BANCARIAS',
+    promoTitle: 'Beneficios vigentes',
+    promoBody: 'Aprovechá cuotas y descuentos con los bancos adheridos.',
+    promoValidityLabel: 'Vigencia',
+    promoDisclaimer: 'Promociones sujetas a los términos y condiciones de cada entidad. Consultá la vigencia en tienda.',
+
+    // Novedades
+    newsKicker: 'NOVEDADES',
+    newsTitle: 'Lo último de la tienda',
+    newsBody: 'Enterate de lanzamientos, eventos y novedades antes de tu visita.',
+
+    // Servicios
+    servicesKicker: 'NUESTROS SERVICIOS',
+    servicesTitle: 'Pensado para tu experiencia',
+    servicesBody: 'Todo lo que ofrecemos para que tu visita sea más cómoda.',
+
+    // Newsletter
+    newsletterKicker: 'NEWSLETTER',
+    newsletterTitle: 'Sumate a nuestras novedades',
+    newsletterBody: 'Recibí promociones, lanzamientos y noticias de la tienda en tu email.',
+    newsletterPlaceholder: 'Tu email',
+    newsletterButton: 'Suscribirme',
+    newsletterOk: '¡Listo! Ya estás suscripto.',
+    newsletterError: 'No pudimos completar la suscripción. Intentá de nuevo.',
+    newsletterPrivacy: 'Usamos tu email solo para enviarte novedades. Podés darte de baja cuando quieras.',
+    socialFollow: 'Seguinos',
   },
   pt: {
     // Announcement bar & header
@@ -496,6 +529,39 @@ export const ui = {
     companyOf: 'Uma empresa do',
     backToTop: 'Voltar ao topo',
     pageNotFound: 'Página não encontrada',
+
+    // Métodos de pagamento
+    payKicker: 'MEIOS DE PAGAMENTO',
+    payTitle: 'Pague como preferir',
+    payBody: 'Aceitamos os principais cartões e dinheiro em três moedas.',
+
+    // Promoções bancárias
+    promoKicker: 'PROMOÇÕES BANCÁRIAS',
+    promoTitle: 'Benefícios vigentes',
+    promoBody: 'Aproveite parcelas e descontos com os bancos parceiros.',
+    promoValidityLabel: 'Validade',
+    promoDisclaimer: 'Promoções sujeitas aos termos e condições de cada entidade. Consulte a validade na loja.',
+
+    // Novidades
+    newsKicker: 'NOVIDADES',
+    newsTitle: 'As últimas da loja',
+    newsBody: 'Fique por dentro de lançamentos, eventos e novidades antes da sua visita.',
+
+    // Serviços
+    servicesKicker: 'NOSSOS SERVIÇOS',
+    servicesTitle: 'Pensado para a sua experiência',
+    servicesBody: 'Tudo o que oferecemos para tornar sua visita mais confortável.',
+
+    // Newsletter
+    newsletterKicker: 'NEWSLETTER',
+    newsletterTitle: 'Receba nossas novidades',
+    newsletterBody: 'Receba promoções, lançamentos e notícias da loja no seu email.',
+    newsletterPlaceholder: 'Seu email',
+    newsletterButton: 'Inscrever-me',
+    newsletterOk: 'Pronto! Você está inscrito.',
+    newsletterError: 'Não foi possível concluir a inscrição. Tente novamente.',
+    newsletterPrivacy: 'Usamos seu email apenas para enviar novidades. Você pode cancelar quando quiser.',
+    socialFollow: 'Siga-nos',
   },
 } as const
 

@@ -698,3 +698,335 @@
     position: static;
   }
 }
+
+/* --- Kicker with inline icon ----------------------------------------------- */
+
+.kicker svg {
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+
+/* --- Bank promotions ------------------------------------------------------- */
+
+.promos-section {
+  background: var(--cream);
+}
+
+.promo-grid {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.promo-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--brand);
+  border-radius: 12px;
+  padding: 26px 24px;
+  height: 100%;
+}
+
+.promo-bank {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.promo-card h3 {
+  margin: 10px 0 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--navy);
+}
+
+.promo-card p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.promo-validity {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.promo-disclaimer {
+  width: min(1180px, 90vw);
+  margin: 22px auto 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* --- Store news ------------------------------------------------------------ */
+
+.news-grid {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.news-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px 24px;
+  height: 100%;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(7, 28, 54, 0.1);
+}
+
+.news-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.news-tag {
+  background: var(--brand);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.news-date {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.news-card h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  color: var(--navy);
+}
+
+.news-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- Services -------------------------------------------------------------- */
+
+.services-section {
+  background: var(--navy);
+  color: #fff;
+}
+
+.services-section .kicker.light {
+  color: var(--brand-yellow);
+}
+
+.services-section h2 {
+  color: #fff;
+}
+
+.services-section .section-head p {
+  color: #c6d2de;
+}
+
+.services-grid {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 26px 24px;
+  height: 100%;
+}
+
+.service-icon {
+  font-size: 34px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.service-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.service-card p {
+  margin: 0;
+  color: #b9c6d4;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- Payment methods ------------------------------------------------------- */
+
+.payment-grid {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.payment-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.payment-icon {
+  font-size: 20px;
+}
+
+/* --- Newsletter band ------------------------------------------------------- */
+
+.newsletter-band {
+  background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+  color: #fff;
+  padding: 84px max(5vw, 24px);
+  text-align: center;
+}
+
+.newsletter-inner {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.newsletter-band .kicker.light {
+  color: var(--brand-yellow);
+}
+
+.newsletter-band h2 {
+  margin: 8px 0 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.6vw, 40px);
+  color: #fff;
+}
+
+.newsletter-band p {
+  margin: 0 auto 26px;
+  color: #dfeaf4;
+  font-size: 16px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.newsletter-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0 16px;
+  min-width: 280px;
+  flex: 1;
+  max-width: 360px;
+  color: var(--muted);
+}
+
+.newsletter-field input {
+  border: 0;
+  outline: none;
+  padding: 15px 0;
+  width: 100%;
+  color: var(--ink);
+  background: transparent;
+}
+
+.newsletter-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  padding: 15px 26px;
+  font-weight: 700;
+}
+
+.newsletter-error {
+  margin: 14px 0 0;
+  color: #ffd9d5;
+  font-size: 14px;
+}
+
+.newsletter-privacy {
+  display: block;
+  margin-top: 18px;
+  color: #bcd0e2;
+  font-size: 12px;
+}
+
+/* --- Footer social --------------------------------------------------------- */
+
+.footer-social {
+  margin-top: 18px;
+}
+
+.footer-social > span {
+  display: block;
+  font-size: 13px;
+  color: #b9c6d4;
+  margin-bottom: 10px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social-links a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-social-links a:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
+  .promo-grid,
+  .news-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}

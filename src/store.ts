@@ -28,6 +28,8 @@ export interface StoreAdapter {
   listReservations(): Promise<Reservation[]>
   setReservationStatus(code: string, status: ReservationStatus): Promise<void>
   setStock(productId: string, stock: number): Promise<void>
+  /** Newsletter opt-in. Resolves on success; rejects if the email could not be stored. */
+  subscribeNewsletter(email: string, locale: Locale): Promise<void>
 }
 
 // ---------------------------------------------------------------------------
@@ -196,6 +198,20 @@ export const demoAdapter: StoreAdapter = {
   },
   async setStock(productId, stock) {
     saveProducts(getProducts().map(p => (p.id === productId ? { ...p, stock: Math.max(0, stock) } : p)))
+  },
+  async subscribeNewsletter(email, locale) {
+    const key = 'dfspi-newsletter'
+    let list: { email: string; locale: Locale }[] = []
+    try {
+      list = JSON.parse(localStorage.getItem(key) || '[]')
+    } catch {
+      list = []
+    }
+    const normalized = email.trim().toLowerCase()
+    if (!list.some(s => s.email === normalized)) {
+      list.push({ email: normalized, locale })
+      localStorage.setItem(key, JSON.stringify(list))
+    }
   },
 }
 

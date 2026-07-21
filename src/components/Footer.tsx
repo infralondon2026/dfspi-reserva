@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
-import { Clock3, Mail, MapPin, Phone } from 'lucide-react'
+import { Clock3, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import { logo, mapsUrl, storeAddress, storeCity, storeEmail, storePhone } from '../assets'
 import { RESERVAS_ENABLED } from '../config'
 import { useLocale } from '../context/AppContext'
+import { socials } from '../siteContent'
+
+const SOCIAL_ICON = { instagram: Instagram, facebook: Facebook }
 
 export default function Footer() {
   const { tr } = useLocale()
@@ -40,6 +43,27 @@ export default function Footer() {
           <p className="footer-contact">
             <Mail size={15} /> <a href={`mailto:${storeEmail}`}>{storeEmail}</a>
           </p>
+          {socials.length > 0 && (
+            <div className="footer-social">
+              <span>{tr('socialFollow')}</span>
+              <div className="footer-social-links">
+                {socials.map(social => {
+                  const Icon = SOCIAL_ICON[social.icon]
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={social.name}
+                    >
+                      <Icon size={18} />
+                    </a>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="footer-bottom">
