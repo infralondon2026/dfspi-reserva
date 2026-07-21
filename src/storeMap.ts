@@ -1,73 +1,181 @@
 import type { Locale } from './types'
 
 /**
- * Mapa esquemático de la tienda para la sección interactiva.
+ * Sectores del plano OFICIAL de la tienda (public/img/store-map.png).
  *
- * PARA REVISIÓN: los sectores, sus marcas y su ubicación en el plano son una
- * aproximación editable. Ajustar `sectors` a la distribución real del local.
- * Las coordenadas (x, y, w, h) están en el sistema del SVG de 1000×620 que
- * dibuja StoreMap.tsx; moverlas reacomoda las zonas del plano sin tocar código.
+ * `rect` está en PORCENTAJE (0–100) relativo a la imagen del plano: define la
+ * zona clickeable que se superpone sobre cada local. Ajustar esos valores
+ * recalibra los hotspots sin tocar código.
+ *
+ * PARA REVISIÓN DE MARKETING: las marcas de cada sector son una aproximación
+ * editable; reemplazar por las marcas reales de cada local.
  */
 export interface StoreSector {
   id: string
   name: Record<Locale, string>
-  /** Emoji ilustrativo del sector. */
   icon: string
-  /** Color de acento de la zona (paleta de marca). */
+  /** Color de acento (paleta del plano: navy / teal / coral). */
   color: string
-  /** Marcas destacadas del sector. */
   brands: string[]
-  /** Rectángulo de la zona dentro del SVG 1000×620. */
+  /** Zona clickeable en % de la imagen del plano: {x, y, w, h}. */
   rect: { x: number; y: number; w: number; h: number }
 }
 
+const NAVY = '#1b2a52'
+const TEAL = '#3fb0a6'
+const CORAL = '#ef8a6f'
+
 export const storeSectors: StoreSector[] = [
+  {
+    id: 'istore',
+    name: { es: 'iStore', pt: 'iStore' },
+    icon: '📱',
+    color: NAVY,
+    brands: ['Apple'],
+    rect: { x: 27, y: 18, w: 13, h: 15 },
+  },
+  {
+    id: 'electronica',
+    name: { es: 'Electrónica', pt: 'Eletrônica' },
+    icon: '🎧',
+    color: NAVY,
+    brands: ['Samsung', 'JBL', 'Bose', 'GoPro', 'Xiaomi'],
+    rect: { x: 42, y: 18, w: 12, h: 15 },
+  },
+  {
+    id: 'cosmetica',
+    name: { es: 'Cosmética', pt: 'Cosmética' },
+    icon: '💄',
+    color: TEAL,
+    brands: ['Clinique', 'Estée Lauder', 'Lancôme', 'Clarins'],
+    rect: { x: 58, y: 18, w: 12, h: 15 },
+  },
+  {
+    id: 'lentes-top',
+    name: { es: 'Lentes', pt: 'Óculos' },
+    icon: '🕶️',
+    color: CORAL,
+    brands: ['Ray-Ban', 'Oakley'],
+    rect: { x: 71, y: 18, w: 6, h: 19 },
+  },
+  {
+    id: 'tommy',
+    name: { es: 'Tommy Hilfiger', pt: 'Tommy Hilfiger' },
+    icon: '👕',
+    color: NAVY,
+    brands: ['Tommy Hilfiger'],
+    rect: { x: 26, y: 35, w: 11, h: 13 },
+  },
   {
     id: 'perfumeria',
     name: { es: 'Perfumería', pt: 'Perfumaria' },
     icon: '🌸',
-    color: '#C2185B',
-    brands: ['Carolina Herrera', 'Giorgio Armani', 'Cacharel', 'Moncler', 'Dior', 'Chanel', 'Paco Rabanne', 'Lancôme'],
-    rect: { x: 40, y: 40, w: 300, h: 240 },
+    color: TEAL,
+    brands: ['Carolina Herrera', 'Giorgio Armani', 'Dior', 'Chanel', 'Paco Rabanne', 'Cacharel', 'Moncler'],
+    rect: { x: 42, y: 35, w: 26, h: 13 },
   },
   {
-    id: 'cosmetica',
-    name: { es: 'Cosmética & Skincare', pt: 'Cosmética & Skincare' },
-    icon: '💄',
-    color: '#7B1FA2',
-    brands: ['Clinique', 'Estée Lauder', 'MAC', 'La Roche-Posay', 'Clarins'],
-    rect: { x: 360, y: 40, w: 260, h: 240 },
+    id: 'jugueteria',
+    name: { es: 'Juguetería', pt: 'Brinquedos' },
+    icon: '🧸',
+    color: CORAL,
+    brands: ['LEGO', 'Playmobil', 'Hot Wheels'],
+    rect: { x: 78, y: 36, w: 10, h: 14 },
+  },
+  {
+    id: 'bar-chivas',
+    name: { es: 'Bar de Chivas', pt: 'Bar de Chivas' },
+    icon: '🥃',
+    color: TEAL,
+    brands: ['Chivas Regal'],
+    rect: { x: 35, y: 45, w: 9, h: 14 },
+  },
+  {
+    id: 'equipajes',
+    name: { es: 'Equipajes', pt: 'Bagagens' },
+    icon: '🧳',
+    color: TEAL,
+    brands: ['Samsonite', 'Victorinox', 'Montblanc'],
+    rect: { x: 44, y: 48, w: 10, h: 10 },
+  },
+  {
+    id: 'lentes-centro',
+    name: { es: 'Lentes', pt: 'Óculos' },
+    icon: '👓',
+    color: NAVY,
+    brands: ['Ray-Ban', 'Persol', 'Vogue'],
+    rect: { x: 60, y: 48, w: 7, h: 11 },
+  },
+  {
+    id: 'deportes',
+    name: { es: 'Deportes', pt: 'Esportes' },
+    icon: '👟',
+    color: TEAL,
+    brands: ['Nike', 'adidas', 'Under Armour'],
+    rect: { x: 80, y: 48, w: 9, h: 10 },
+  },
+  {
+    id: 't-tommy',
+    name: { es: 'Tommy (accesorios)', pt: 'Tommy (acessórios)' },
+    icon: '🧢',
+    color: NAVY,
+    brands: ['Tommy Hilfiger'],
+    rect: { x: 25, y: 48, w: 8, h: 9 },
+  },
+  {
+    id: 'modas',
+    name: { es: 'Modas', pt: 'Moda' },
+    icon: '🧥',
+    color: NAVY,
+    brands: ['Lacoste', 'Calvin Klein', 'Guess'],
+    rect: { x: 13, y: 50, w: 12, h: 18 },
+  },
+  {
+    id: 'victorias-secret',
+    name: { es: "Victoria's Secret", pt: "Victoria's Secret" },
+    icon: '💗',
+    color: CORAL,
+    brands: ["Victoria's Secret"],
+    rect: { x: 26, y: 57, w: 10, h: 11 },
   },
   {
     id: 'bebidas',
-    name: { es: 'Bebidas & Licores', pt: 'Bebidas & Licores' },
-    icon: '🥃',
-    color: '#B8860B',
-    brands: ['Chivas Regal', 'Johnnie Walker', 'Jägermeister', 'Amarula', 'Absolut', 'Baileys', 'Moët & Chandon'],
-    rect: { x: 640, y: 40, w: 320, h: 240 },
+    name: { es: 'Bebidas', pt: 'Bebidas' },
+    icon: '🍸',
+    color: NAVY,
+    brands: ['Johnnie Walker', 'Jägermeister', 'Baileys', 'Absolut', 'Amarula'],
+    rect: { x: 43, y: 55, w: 9, h: 13 },
   },
   {
-    id: 'tecnologia',
-    name: { es: 'Electrónica & Tecnología', pt: 'Eletrônica & Tecnologia' },
-    icon: '🎧',
-    color: '#0B6EB6',
-    brands: ['Apple', 'Samsung', 'JBL', 'Bose', 'GoPro', 'Xiaomi'],
-    rect: { x: 40, y: 300, w: 300, h: 240 },
+    id: 'vinos',
+    name: { es: 'Vinos', pt: 'Vinhos' },
+    icon: '🍷',
+    color: NAVY,
+    brands: ['Moët & Chandon', 'Chandon', 'Rutini'],
+    rect: { x: 53, y: 55, w: 9, h: 13 },
   },
   {
-    id: 'delicatessen',
-    name: { es: 'Delicatessen & Chocolates', pt: 'Delicatessen & Chocolates' },
+    id: 'comestibles',
+    name: { es: 'Comestibles', pt: 'Comestíveis' },
     icon: '🍫',
-    color: '#8D6E63',
-    brands: ['Lindt', 'Toblerone', 'Ferrero Rocher', 'Godiva', "M&M's"],
-    rect: { x: 360, y: 300, w: 260, h: 240 },
+    color: CORAL,
+    brands: ['Lindt', 'Toblerone', 'Ferrero Rocher', 'Godiva'],
+    rect: { x: 62, y: 57, w: 9, h: 11 },
   },
   {
-    id: 'accesorios',
-    name: { es: 'Moda & Accesorios', pt: 'Moda & Acessórios' },
-    icon: '🕶️',
-    color: '#00695C',
-    brands: ['Ray-Ban', 'Swatch', 'Victorinox', 'Samsonite', 'Montblanc'],
-    rect: { x: 640, y: 300, w: 320, h: 240 },
+    id: 'mac',
+    name: { es: 'MAC', pt: 'MAC' },
+    icon: '💅',
+    color: TEAL,
+    brands: ['MAC Cosmetics'],
+    rect: { x: 71, y: 59, w: 7, h: 9 },
+  },
+  {
+    id: 'bazar',
+    name: { es: 'Bazar', pt: 'Bazar' },
+    icon: '🎁',
+    color: TEAL,
+    brands: ['Regalería', 'Souvenirs'],
+    rect: { x: 78, y: 56, w: 10, h: 10 },
   },
 ]

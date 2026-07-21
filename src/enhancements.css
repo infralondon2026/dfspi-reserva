@@ -556,64 +556,80 @@
   align-items: start;
 }
 
-.store-map-svg {
+/* Official floor plan image + clickable hotspots */
+.store-map-figure {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  line-height: 0;
+}
+
+.store-map-figure.no-image {
+  display: none;
+}
+
+.store-map-image {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: #fbfcfe;
 }
 
-.map-floor {
-  fill: #f3f6f9;
-  stroke: #e5e9ee;
-  stroke-width: 2;
-}
-
-.map-zone {
+.map-hotspot {
+  position: absolute;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.map-hotspot:hover {
+  background: color-mix(in srgb, var(--hot) 16%, transparent);
+}
+
+.map-hotspot.on {
+  background: color-mix(in srgb, var(--hot) 26%, transparent);
+  box-shadow: 0 0 0 3px var(--hot);
+}
+
+.map-hotspot:focus-visible {
   outline: none;
+  box-shadow: 0 0 0 3px var(--hot);
 }
 
-.map-zone-rect {
-  fill-opacity: 0.13;
-  stroke-width: 2;
-  transition: fill-opacity 0.25s ease, stroke-width 0.25s ease;
+/* Accessible / mobile / fallback selector */
+.store-map-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
 }
 
-.map-zone:hover .map-zone-rect {
-  fill-opacity: 0.22;
+.store-map-chip {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.map-zone.on .map-zone-rect {
-  fill-opacity: 0.32;
-  stroke-width: 4;
+.store-map-chip:hover {
+  border-color: var(--brand);
 }
 
-.map-zone:focus-visible .map-zone-rect {
-  stroke-width: 4;
-}
-
-.map-zone-icon {
-  font-size: 46px;
-  pointer-events: none;
-}
-
-.map-zone-label {
-  font-size: 19px;
-  font-weight: 700;
-  fill: var(--navy);
-  pointer-events: none;
-}
-
-.map-door rect {
-  fill: var(--brand);
-}
-
-.map-door-label {
-  fill: var(--muted);
-  font-size: 15px;
+.store-map-chip.on {
   font-weight: 700;
 }
 

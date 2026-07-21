@@ -1,15 +1,14 @@
 import { useState } from 'react'
 import { MapPin } from 'lucide-react'
+import { asset } from '../assets'
 import { useLocale } from '../context/AppContext'
 import Reveal from './Reveal'
 import { storeSectors, type StoreSector } from '../storeMap'
 
-const VIEW_W = 1000
-const VIEW_H = 620
-
 export default function StoreMap() {
   const { locale, tr } = useLocale()
   const [activeId, setActiveId] = useState<string>(storeSectors[0]?.id ?? '')
+  const [hasImage, setHasImage] = useState(true)
   const active: StoreSector | undefined = storeSectors.find(s => s.id === activeId)
 
   return (
@@ -27,62 +26,60 @@ export default function StoreMap() {
       <Reveal>
         <div className="store-map">
           <div className="store-map-plan">
-            <svg
-              viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
-              className="store-map-svg"
-              role="group"
-              aria-label={tr('mapTitle')}
-            >
-              {/* piso / marco */}
-              <rect x="8" y="8" width={VIEW_W - 16} height={VIEW_H - 16} rx="18" className="map-floor" />
-
+            <div className={hasImage ? 'store-map-figure' : 'store-map-figure no-image'}>
+              <img
+                src={asset('img/store-map.jpeg')}
+                alt={tr('mapTitle')}
+                className="store-map-image"
+                onError={() => setHasImage(false)}
+              />
+              {/* Hotspots: zonas clickeables posicionadas en % sobre el plano */}
               {storeSectors.map(sector => {
                 const on = sector.id === activeId
-                const { x, y, w, h } = sector.rect
                 return (
-                  <g
+                  <button
                     key={sector.id}
-                    className={on ? 'map-zone on' : 'map-zone'}
-                    onMouseEnter={() => setActiveId(sector.id)}
-                    onClick={() => setActiveId(sector.id)}
-                    tabIndex={0}
-                    role="button"
-                    aria-pressed={on}
-                    aria-label={sector.name[locale]}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        setActiveId(sector.id)
-                      }
+                    type="button"
+                    className={on ? 'map-hotspot on' : 'map-hotspot'}
+                    style={{
+                      left: `${sector.rect.x}%`,
+                      top: `${sector.rect.y}%`,
+                      width: `${sector.rect.w}%`,
+                      height: `${sector.rect.h}%`,
+                      // el resaltado usa el color del sector
+                      ['--hot' as string]: sector.color,
                     }}
-                  >
-                    <rect
-                      x={x}
-                      y={y}
-                      width={w}
-                      height={h}
-                      rx="14"
-                      className="map-zone-rect"
-                      style={{ fill: sector.color, stroke: sector.color }}
-                    />
-                    <text x={x + w / 2} y={y + h / 2 - 14} className="map-zone-icon" textAnchor="middle">
-                      {sector.icon}
-                    </text>
-                    <text x={x + w / 2} y={y + h / 2 + 30} className="map-zone-label" textAnchor="middle">
-                      {sector.name[locale]}
-                    </text>
-                  </g>
+                    onMouseEnter={() => setActiveId(sector.id)}
+                    onFocus={() => setActiveId(sector.id)}
+                    onClick={() => setActiveId(sector.id)}
+                    aria-label={sector.name[locale]}
+                    aria-pressed={on}
+                  />
                 )
               })}
+            </div>
 
-              {/* accesos */}
-              <g className="map-door" aria-hidden="true">
-                <rect x={VIEW_W / 2 - 70} y={VIEW_H - 20} width="140" height="16" rx="6" />
-                <text x={VIEW_W / 2} y={VIEW_H - 30} textAnchor="middle" className="map-door-label">
-                  {tr('mapEntrance')}
-                </text>
-              </g>
-            </svg>
+            {/* Selector accesible (teclado / mobile / respaldo si falta la imagen) */}
+            <div className="store-map-chips" role="tablist" aria-label={tr('mapTitle')}>
+              {storeSectors.map(sector => {
+                const on = sector.id === activeId
+                return (
+                  <button
+                    key={sector.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={on}
+                    className={on ? 'store-map-chip on' : 'store-map-chip'}
+                    style={on ? { borderColor: sector.color, color: sector.color } : undefined}
+                    onMouseEnter={() => setActiveId(sector.id)}
+                    onClick={() => setActiveId(sector.id)}
+                  >
+                    <span aria-hidden="true">{sector.icon}</span> {sector.name[locale]}
+                  </button>
+                )
+              })}
+            </div>
+
             <p className="store-map-hint">
               <MapPin size={15} /> {tr('mapHint')}
             </p>
