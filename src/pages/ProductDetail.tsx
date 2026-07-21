@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Clock3, Minus, Plus, ShieldCheck, ShoppingBag } from 'lucide-react'
+import { ArrowLeft, Clock3, MapPin, Minus, Plus, ShieldCheck, ShoppingBag } from 'lucide-react'
 import { resolveImage } from '../assets'
+import { RESERVAS_ENABLED } from '../config'
 import { useCart, useLocale, useStoreData } from '../context/AppContext'
 import NotFound from './NotFound'
 
@@ -47,34 +48,51 @@ export default function ProductDetail() {
             <strong>{product.price}</strong>
             {product.originalPrice && <del>USD {product.originalPrice}</del>}
           </div>
-          <div className="availability big">
-            <i className={product.stock < 5 ? 'low' : ''} />
-            {product.stock < 5 ? tr('lastUnits') : tr('available')} · {product.stock} {tr('inStock')}
-          </div>
+          {RESERVAS_ENABLED && (
+            <div className="availability big">
+              <i className={product.stock < 5 ? 'low' : ''} />
+              {product.stock < 5 ? tr('lastUnits') : tr('available')} · {product.stock} {tr('inStock')}
+            </div>
+          )}
           <p className="description">{product.description[locale]}</p>
-          <div className="quantity">
-            <button onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label="-">
-              <Minus />
-            </button>
-            <span>{quantity}</span>
-            <button
-              onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-              aria-label="+"
-            >
-              <Plus />
-            </button>
-          </div>
-          <button className="button navy wide" onClick={addAndGo}>
-            <ShoppingBag /> {tr('add')}
-          </button>
-          <div className="detail-benefits">
-            <p>
-              <ShieldCheck /> {tr('noPrepay')}
-            </p>
-            <p>
-              <Clock3 /> {tr('pickupDays')}
-            </p>
-          </div>
+          {RESERVAS_ENABLED ? (
+            <>
+              <div className="quantity">
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} aria-label="-">
+                  <Minus />
+                </button>
+                <span>{quantity}</span>
+                <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} aria-label="+">
+                  <Plus />
+                </button>
+              </div>
+              <button className="button navy wide" onClick={addAndGo}>
+                <ShoppingBag /> {tr('add')}
+              </button>
+              <div className="detail-benefits">
+                <p>
+                  <ShieldCheck /> {tr('noPrepay')}
+                </p>
+                <p>
+                  <Clock3 /> {tr('pickupDays')}
+                </p>
+              </div>
+            </>
+          ) : (
+            <div className="detail-instore">
+              <p className="instore-badge">
+                <MapPin size={18} /> {tr('inStoreOnly')}
+              </p>
+              <div className="detail-benefits">
+                <p>
+                  <ShieldCheck /> {tr('trust2')}
+                </p>
+                <p>
+                  <MapPin /> {tr('heroLocation')}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

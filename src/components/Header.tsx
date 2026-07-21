@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Clock3, Languages, Menu, ShoppingBag, Sparkles, X } from 'lucide-react'
 import { logo } from '../assets'
+import { RESERVAS_ENABLED } from '../config'
 import { useCart, useLocale } from '../context/AppContext'
 import { useScrolled, useScrollProgress } from '../hooks'
 
@@ -35,15 +36,20 @@ export default function Header() {
           <NavLink to="/catalogo" onClick={close}>
             {tr('navCatalog')}
           </NavLink>
-          <Link to="/#como" onClick={close}>
-            {tr('navHow')}
+          <Link to="/#ofertas" onClick={close}>
+            {tr('navOffers')}
+          </Link>
+          <Link to="/#mapa" onClick={close}>
+            {tr('navStore')}
           </Link>
           <Link to="/#faq" onClick={close}>
             {tr('navFaq')}
           </Link>
-          <NavLink to="/mi-reserva" onClick={close}>
-            {tr('navReservation')}
-          </NavLink>
+          {RESERVAS_ENABLED && (
+            <NavLink to="/mi-reserva" onClick={close}>
+              {tr('navReservation')}
+            </NavLink>
+          )}
         </nav>
         <div className="header-actions">
           <button
@@ -54,10 +60,12 @@ export default function Header() {
             <Languages size={18} />
             <span>{locale.toUpperCase()}</span>
           </button>
-          <Link to="/seleccion" className="cart-button" aria-label={tr('cart')}>
-            <ShoppingBag size={20} />
-            {count > 0 && <b>{count}</b>}
-          </Link>
+          {RESERVAS_ENABLED && (
+            <Link to="/seleccion" className="cart-button" aria-label={tr('cart')}>
+              <ShoppingBag size={20} />
+              {count > 0 && <b>{count}</b>}
+            </Link>
+          )}
           <button className="menu" onClick={() => setOpen(!open)} aria-label={tr('menu')}>
             {open ? <X /> : <Menu />}
           </button>

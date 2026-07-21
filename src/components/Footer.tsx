@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Clock3, Mail, MapPin, Phone } from 'lucide-react'
 import { logo, mapsUrl, storeAddress, storeCity, storeEmail, storePhone } from '../assets'
+import { RESERVAS_ENABLED } from '../config'
 import { useLocale } from '../context/AppContext'
 
 export default function Footer() {
@@ -15,8 +16,9 @@ export default function Footer() {
         <div>
           <h4>{tr('store')}</h4>
           <Link to="/catalogo">{tr('navCatalog')}</Link>
-          <Link to="/mi-reserva">{tr('navReservation')}</Link>
-          <Link to="/#como">{tr('navHow')}</Link>
+          <Link to="/#ofertas">{tr('navOffers')}</Link>
+          <Link to="/#mapa">{tr('navStore')}</Link>
+          {RESERVAS_ENABLED && <Link to="/mi-reserva">{tr('navReservation')}</Link>}
         </div>
         <div>
           <h4>{tr('help')}</h4>

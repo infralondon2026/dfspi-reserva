@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Clock3, MapPin, PackageCheck, Quote, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Clock3, MapPin, PackageCheck, Quote, ShieldCheck, Tag } from 'lucide-react'
 import { hero, mapsUrl, resolveImage, storeAddress, storeCity } from '../assets'
 import FaqSection from '../components/FaqSection'
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard'
 import Reveal from '../components/Reveal'
+import StoreMap from '../components/StoreMap'
+import { RESERVAS_ENABLED } from '../config'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { UiKey } from '../i18n'
 import type { Category } from '../types'
@@ -14,10 +16,11 @@ export default function Home() {
       <Hero />
       <TrustStrip />
       <CategoryShowcase />
+      <OffersSection />
       <FeaturedSection />
-      <StatsBand />
-      <HowSection />
+      <StoreMap />
       <BrandMarquee />
+      {RESERVAS_ENABLED && <HowSection />}
       <Testimonials />
       <FaqSection />
       <VisitSection />
@@ -42,8 +45,8 @@ function Hero() {
           <Link className="button gold" to="/catalogo">
             {tr('explore')} <ArrowRight size={18} />
           </Link>
-          <Link className="button ghost" to="/#como">
-            {tr('how')}
+          <Link className="button ghost" to="/#ofertas">
+            {tr('heroOffers')}
           </Link>
         </div>
       </div>
@@ -91,8 +94,7 @@ const CATEGORY_CARDS: { category: Category; blurbKey: UiKey }[] = [
 function CategoryShowcase() {
   const { tr } = useLocale()
   const { products } = useStoreData()
-  const imageFor = (category: Category) =>
-    products.find(p => p.category === category)?.image
+  const imageFor = (category: Category) => products.find(p => p.category === category)?.image
   return (
     <section id="categorias" className="section category-section">
       <Reveal>
@@ -126,6 +128,38 @@ function CategoryShowcase() {
   )
 }
 
+function OffersSection() {
+  const { tr } = useLocale()
+  const { products, loading } = useStoreData()
+  const offers = products.filter(p => p.originalPrice && p.originalPrice > p.price).slice(0, 4)
+  if (!loading && !offers.length) return null
+  return (
+    <section id="ofertas" className="section offers-section">
+      <Reveal>
+        <div className="section-head">
+          <div>
+            <span className="kicker gold-kicker">
+              <Tag size={14} /> {tr('offersKicker')}
+            </span>
+            <h2>{tr('offersTitle')}</h2>
+            <p>{tr('offersBody')}</p>
+          </div>
+          <Link to="/catalogo" className="text-link">
+            {tr('offersCta')} <ArrowRight size={16} />
+          </Link>
+        </div>
+      </Reveal>
+      <Reveal>
+        <div className="product-grid offers-grid">
+          {loading
+            ? Array.from({ length: 4 }, (_, i) => <ProductCardSkeleton key={i} />)
+            : offers.map(product => <ProductCard key={product.id} product={product} />)}
+        </div>
+      </Reveal>
+    </section>
+  )
+}
+
 function FeaturedSection() {
   const { tr } = useLocale()
   const { products, loading } = useStoreData()
@@ -155,28 +189,6 @@ function FeaturedSection() {
   )
 }
 
-function StatsBand() {
-  const { tr } = useLocale()
-  const stats: [UiKey, UiKey][] = [
-    ['stat1v', 'stat1l'],
-    ['stat2v', 'stat2l'],
-    ['stat3v', 'stat3l'],
-    ['stat4v', 'stat4l'],
-  ]
-  return (
-    <section className="stats-band">
-      {stats.map(([value, label], index) => (
-        <Reveal key={label} delay={index * 80}>
-          <div className="stat-item">
-            <strong>{tr(value)}</strong>
-            <span>{tr(label)}</span>
-          </div>
-        </Reveal>
-      ))}
-    </section>
-  )
-}
-
 function HowSection() {
   const { tr } = useLocale()
   const steps: [string, UiKey, UiKey][] = [
@@ -195,10 +207,10 @@ function HowSection() {
         </Link>
       </Reveal>
       <div className="steps">
-        {steps.map(([n, title, body], index) => (
-          <Reveal key={n} delay={index * 100}>
+        {steps.map(([nStep, title, body], index) => (
+          <Reveal key={nStep} delay={index * 100}>
             <div className="step">
-              <span>{n}</span>
+              <span>{nStep}</span>
               <div>
                 <h3>{tr(title)}</h3>
                 <p>{tr(body)}</p>

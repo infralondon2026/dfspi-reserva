@@ -3,10 +3,12 @@ import type { Locale } from './types'
 export const ui = {
   es: {
     // Announcement bar & header
-    announcement: 'Reservá online y pagá al retirar',
+    announcement: 'Marcas internacionales con precios libres de impuestos',
     hours: 'Todos los días · 12 a 20 h (AR)',
     navHome: 'Inicio',
     navCatalog: 'Catálogo',
+    navStore: 'La tienda',
+    navOffers: 'Ofertas',
     navHow: 'Cómo funciona',
     navFaq: 'Ayuda',
     navReservation: 'Mi reserva',
@@ -15,20 +17,21 @@ export const ui = {
 
     // Hero
     heroEyebrow: 'DUTY FREE · PUERTO IGUAZÚ',
-    heroTitle: 'Tu viaje empieza antes de cruzar.',
-    heroBody: 'Descubrí marcas internacionales, reservá online y retirá sin esperas en nuestra tienda de frontera.',
+    heroTitle: 'El mundo duty free, en la frontera.',
+    heroBody: 'Perfumería, bebidas, tecnología y delicatessen de las mejores marcas, con precios libres de impuestos, en Puerto Iguazú.',
+    heroOffers: 'Ver ofertas',
     explore: 'Explorar catálogo',
     how: 'Cómo funciona',
     reserve: 'Reservar ahora',
     heroLocation: 'Puerto Iguazú, Misiones',
 
     // Trust strip
-    trust1: 'Reserva sin pago',
-    trust1b: 'Pagá recién en tienda',
-    trust2: 'Stock reservado',
-    trust2b: 'Hasta el día de retiro',
-    trust3: 'Retiro ágil',
-    trust3b: 'Mostrá tu código QR',
+    trust1: 'Marcas internacionales',
+    trust1b: 'Las casas más deseadas del mundo',
+    trust2: 'Precios duty free',
+    trust2b: 'Libres de impuestos',
+    trust3: 'Atención bilingüe',
+    trust3b: 'Español y portugués',
 
     // Categories showcase
     categoriesKicker: 'EXPLORÁ POR CATEGORÍA',
@@ -45,6 +48,24 @@ export const ui = {
     featured: 'Selección para tu viaje',
     featuredBody: 'Productos elegidos para sorprender, regalar y disfrutar.',
     viewAll: 'Ver todo',
+
+    // Ofertas
+    offersKicker: 'OFERTAS DESTACADAS',
+    offersTitle: 'Descuentos para tu viaje',
+    offersBody: 'Aprovechá precios rebajados en una selección de marcas premium.',
+    offersCta: 'Ver todas las ofertas',
+    offBadge: 'OFF',
+    saveLabel: 'Ahorrás',
+
+    // Mapa de la tienda
+    mapKicker: 'LA TIENDA POR DENTRO',
+    mapTitle: 'Recorré cada sector',
+    mapBody: 'Explorá el plano de la tienda y descubrí qué marcas vas a encontrar en cada área.',
+    mapHint: 'Tocá un sector del plano para ver sus marcas',
+    mapBrandsLabel: 'Marcas en este sector',
+    mapPickPrompt: 'Elegí un sector del plano para ver sus marcas',
+    mapEntrance: 'Entrada',
+    mapCheckout: 'Cajas',
 
     // Stats band
     stat1v: '0',
@@ -87,9 +108,10 @@ export const ui = {
     visitMap: 'Ver en Google Maps',
 
     // Final CTA
-    ctaTitle: '¿Listo para tu próximo cruce?',
-    ctaBody: 'Armá tu selección hoy y encontrala esperándote en Puerto Iguazú.',
-    ctaButton: 'Empezar mi reserva',
+    ctaTitle: '¿Nos visitás en tu próximo viaje?',
+    ctaBody: 'Descubrí todo lo que tenemos para vos en Puerto Iguazú, camino a las Cataratas.',
+    ctaButton: 'Ver catálogo',
+    inStoreOnly: 'Disponible en nuestra tienda',
 
     // Catalog
     catalogKicker: 'DUTY FREE COLLECTION',
@@ -229,10 +251,12 @@ export const ui = {
   },
   pt: {
     // Announcement bar & header
-    announcement: 'Reserve online e pague na retirada',
+    announcement: 'Marcas internacionais com preços livres de impostos',
     hours: 'Todos os dias · 12h às 20h (AR)',
     navHome: 'Início',
     navCatalog: 'Catálogo',
+    navStore: 'A loja',
+    navOffers: 'Ofertas',
     navHow: 'Como funciona',
     navFaq: 'Ajuda',
     navReservation: 'Minha reserva',
@@ -241,20 +265,21 @@ export const ui = {
 
     // Hero
     heroEyebrow: 'DUTY FREE · PUERTO IGUAZÚ',
-    heroTitle: 'Sua viagem começa antes de cruzar.',
-    heroBody: 'Descubra marcas internacionais, reserve online e retire sem espera em nossa loja de fronteira.',
+    heroTitle: 'O mundo duty free, na fronteira.',
+    heroBody: 'Perfumaria, bebidas, tecnologia e delicatessen das melhores marcas, com preços livres de impostos, em Puerto Iguazú.',
+    heroOffers: 'Ver ofertas',
     explore: 'Explorar catálogo',
     how: 'Como funciona',
     reserve: 'Reservar agora',
     heroLocation: 'Puerto Iguazú, Misiones',
 
     // Trust strip
-    trust1: 'Reserva sem pagamento',
-    trust1b: 'Pague somente na loja',
-    trust2: 'Estoque reservado',
-    trust2b: 'Até o dia da retirada',
-    trust3: 'Retirada rápida',
-    trust3b: 'Mostre seu código QR',
+    trust1: 'Marcas internacionais',
+    trust1b: 'As casas mais desejadas do mundo',
+    trust2: 'Preços duty free',
+    trust2b: 'Livres de impostos',
+    trust3: 'Atendimento bilíngue',
+    trust3b: 'Espanhol e português',
 
     // Categories showcase
     categoriesKicker: 'EXPLORE POR CATEGORIA',
@@ -271,6 +296,24 @@ export const ui = {
     featured: 'Seleção para sua viagem',
     featuredBody: 'Produtos escolhidos para surpreender, presentear e aproveitar.',
     viewAll: 'Ver tudo',
+
+    // Ofertas
+    offersKicker: 'OFERTAS EM DESTAQUE',
+    offersTitle: 'Descontos para sua viagem',
+    offersBody: 'Aproveite preços reduzidos em uma seleção de marcas premium.',
+    offersCta: 'Ver todas as ofertas',
+    offBadge: 'OFF',
+    saveLabel: 'Você economiza',
+
+    // Mapa da loja
+    mapKicker: 'A LOJA POR DENTRO',
+    mapTitle: 'Percorra cada setor',
+    mapBody: 'Explore a planta da loja e descubra quais marcas você vai encontrar em cada área.',
+    mapHint: 'Toque em um setor da planta para ver suas marcas',
+    mapBrandsLabel: 'Marcas neste setor',
+    mapPickPrompt: 'Escolha um setor da planta para ver suas marcas',
+    mapEntrance: 'Entrada',
+    mapCheckout: 'Caixas',
 
     // Stats band
     stat1v: '0',
@@ -313,9 +356,10 @@ export const ui = {
     visitMap: 'Ver no Google Maps',
 
     // Final CTA
-    ctaTitle: 'Pronto para o seu próximo cruce?',
-    ctaBody: 'Monte sua seleção hoje e encontre tudo esperando por você em Puerto Iguazú.',
-    ctaButton: 'Começar minha reserva',
+    ctaTitle: 'Vai nos visitar na sua próxima viagem?',
+    ctaBody: 'Descubra tudo o que temos para você em Puerto Iguazú, a caminho das Cataratas.',
+    ctaButton: 'Ver catálogo',
+    inStoreOnly: 'Disponível em nossa loja',
 
     // Catalog
     catalogKicker: 'DUTY FREE COLLECTION',

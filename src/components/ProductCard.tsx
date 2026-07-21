@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Heart, Plus } from 'lucide-react'
+import { ArrowRight, Check, Heart, Plus } from 'lucide-react'
 import { resolveImage } from '../assets'
+import { RESERVAS_ENABLED } from '../config'
 import { useCart, useLocale } from '../context/AppContext'
 import type { Product } from '../types'
 
@@ -26,13 +27,15 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.originalPrice && (
           <span className="sale">-{Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
         )}
-        <button
-          className={favorite ? 'heart active' : 'heart'}
-          onClick={() => toggleFavorite(product.id)}
-          aria-label={tr('favorite')}
-        >
-          <Heart size={19} />
-        </button>
+        {RESERVAS_ENABLED && (
+          <button
+            className={favorite ? 'heart active' : 'heart'}
+            onClick={() => toggleFavorite(product.id)}
+            aria-label={tr('favorite')}
+          >
+            <Heart size={19} />
+          </button>
+        )}
       </div>
       <div className="product-info">
         <span className="brand-name">{product.brand}</span>
@@ -40,20 +43,29 @@ export default function ProductCard({ product }: { product: Product }) {
           <h3>{product.name}</h3>
         </Link>
         <p>{product.subtitle[locale]}</p>
-        <div className="availability">
-          <i className={product.stock < 5 ? 'low' : ''} />
-          {product.stock < 5 ? tr('lastUnits') : tr('available')}
-        </div>
+        {RESERVAS_ENABLED && (
+          <div className="availability">
+            <i className={product.stock < 5 ? 'low' : ''} />
+            {product.stock < 5 ? tr('lastUnits') : tr('available')}
+          </div>
+        )}
         <div className="product-bottom">
           <div className="price">
             <small>USD</small>
             <strong>{product.price}</strong>
             {product.originalPrice && <del>${product.originalPrice}</del>}
           </div>
-          <button onClick={handleAdd} className={done ? 'add-button done' : 'add-button'}>
-            {done ? <Check size={19} /> : <Plus size={19} />}
-            <span>{done ? tr('added') : tr('add')}</span>
-          </button>
+          {RESERVAS_ENABLED ? (
+            <button onClick={handleAdd} className={done ? 'add-button done' : 'add-button'}>
+              {done ? <Check size={19} /> : <Plus size={19} />}
+              <span>{done ? tr('added') : tr('add')}</span>
+            </button>
+          ) : (
+            <Link to={`/producto/${product.id}`} className="add-button ghost-link" aria-label={tr('details')}>
+              <span>{tr('details')}</span>
+              <ArrowRight size={17} />
+            </Link>
+          )}
         </div>
       </div>
     </article>

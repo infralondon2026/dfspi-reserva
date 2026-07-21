@@ -3,6 +3,68 @@
    Scroll experience, new home sections and loading states.
    =========================================================================== */
 
+/* --- Brand palette (from the official logo) -------------------------------- */
+
+:root {
+  --brand: #0b6eb6;
+  --brand-dark: #095c99;
+  --brand-yellow: #ffd511;
+  --brand-red: #e4051f;
+}
+
+/* --- Full-colour brand banner (header) ------------------------------------- */
+
+.header {
+  background: var(--brand);
+  border-bottom: none;
+}
+
+.header.scrolled {
+  box-shadow: 0 8px 26px rgba(9, 40, 66, 0.28);
+}
+
+.header .brand img {
+  /* the logo already sits on the same blue, so it blends into the banner */
+  height: 50px;
+  width: auto;
+}
+
+.header .nav a {
+  color: #fff;
+  font-weight: 600;
+}
+
+.header .nav a:hover,
+.header .nav a.active {
+  color: var(--brand-yellow);
+}
+
+.header .nav a.active::after {
+  background: var(--brand-yellow);
+}
+
+.header .lang,
+.header .menu,
+.header .cart-button {
+  color: #fff;
+}
+
+.header .lang {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.header .cart-button b {
+  background: var(--brand-yellow);
+  color: var(--navy);
+}
+
+@media (max-width: 860px) {
+  /* mobile dropdown sits on the same brand blue */
+  .header .nav.open {
+    background: var(--brand-dark);
+  }
+}
+
 /* --- Scroll progress & header state --------------------------------------- */
 
 .scroll-progress {
@@ -426,5 +488,213 @@
   .back-to-top {
     right: 12px;
     bottom: 148px;
+  }
+}
+
+/* --- Offers section -------------------------------------------------------- */
+
+.offers-section {
+  background: var(--cream);
+}
+
+.kicker.gold-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--brand-red);
+}
+
+.offers-grid {
+  margin-top: 4px;
+}
+
+/* "Ver detalle" link styled like the add-to-cart button (showcase mode) */
+.add-button.ghost-link {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--navy);
+  text-decoration: none;
+  gap: 7px;
+}
+
+.add-button.ghost-link:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* --- Product detail: in-store availability (showcase mode) ----------------- */
+
+.detail-instore {
+  margin-top: 8px;
+}
+
+.instore-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--cream);
+  color: var(--navy);
+  font-weight: 700;
+  padding: 13px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  margin: 0 0 20px;
+}
+
+.instore-badge svg {
+  color: var(--brand);
+}
+
+/* --- Interactive store map ------------------------------------------------- */
+
+.store-map {
+  width: min(1180px, 90vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.store-map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fbfcfe;
+}
+
+.map-floor {
+  fill: #f3f6f9;
+  stroke: #e5e9ee;
+  stroke-width: 2;
+}
+
+.map-zone {
+  cursor: pointer;
+  outline: none;
+}
+
+.map-zone-rect {
+  fill-opacity: 0.13;
+  stroke-width: 2;
+  transition: fill-opacity 0.25s ease, stroke-width 0.25s ease;
+}
+
+.map-zone:hover .map-zone-rect {
+  fill-opacity: 0.22;
+}
+
+.map-zone.on .map-zone-rect {
+  fill-opacity: 0.32;
+  stroke-width: 4;
+}
+
+.map-zone:focus-visible .map-zone-rect {
+  stroke-width: 4;
+}
+
+.map-zone-icon {
+  font-size: 46px;
+  pointer-events: none;
+}
+
+.map-zone-label {
+  font-size: 19px;
+  font-weight: 700;
+  fill: var(--navy);
+  pointer-events: none;
+}
+
+.map-door rect {
+  fill: var(--brand);
+}
+
+.map-door-label {
+  fill: var(--muted);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.store-map-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+.store-map-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  position: sticky;
+  top: 110px;
+}
+
+.store-map-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 2px solid;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+
+.store-map-panel-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.store-map-panel h3 {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  color: var(--navy);
+}
+
+.store-map-panel-label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.store-map-brands {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.store-map-brands li {
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 9px 13px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  background: #fafbfc;
+}
+
+@media (max-width: 900px) {
+  .store-map {
+    grid-template-columns: 1fr;
+  }
+  .store-map-panel {
+    position: static;
   }
 }
