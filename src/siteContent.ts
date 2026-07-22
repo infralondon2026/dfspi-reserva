@@ -97,6 +97,6 @@ export interface SocialLink {
 }
 
 export const socials: SocialLink[] = [
-  { name: 'Instagram', url: 'https://www.instagram.com/dutyfreeshoppuertoiguazu', icon: 'instagram' },
-  { name: 'Facebook', url: 'https://www.facebook.com/dutyfreeshoppuertoiguazu', icon: 'facebook' },
+  { name: 'Instagram', url: 'https://www.instagram.com/dfspuertoiguazu/?hl=es', icon: 'instagram' },
+  { name: 'Facebook', url: 'https://www.facebook.com/dfspuertoiguazu/?locale=es_LA', icon: 'facebook' },
 ]

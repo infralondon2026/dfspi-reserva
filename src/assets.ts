@@ -8,6 +8,7 @@ export const asset = (path: string) => import.meta.env.BASE_URL + path
 export const resolveImage = (url: string) => (url.startsWith('http') ? url : asset(url))
 
 export const logo = asset('img/logo.png')
+export const footerLogo = asset('img/LOGO-DFSPI.png')
 
 export const hero = asset('img/portada-web.jpeg')
 

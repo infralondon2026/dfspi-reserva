@@ -1141,6 +1141,13 @@
 
 /* --- Footer social --------------------------------------------------------- */
 
+.footer-brand img {
+  width: min(210px, 100%);
+  height: auto;
+  filter: none;
+  display: block;
+}
+
 .footer-social {
   margin-top: 18px;
 }

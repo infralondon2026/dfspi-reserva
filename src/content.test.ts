@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { RESERVAS_ENABLED } from './config'
 import { faqs } from './data'
 import { ui } from './i18n'
+import { socials } from './siteContent'
 import type { Locale } from './types'
 
 const locales: Locale[] = ['es', 'pt', 'en']
@@ -30,5 +31,12 @@ describe('public informational content', () => {
     expect(Object.keys(ui.en).sort()).toEqual(Object.keys(ui.es).sort())
     expect(ui.en.heroTitle).toMatch(/duty-free/i)
     expect(ui.en.visitorAccessTitle).toBe('Access and documents')
+  })
+
+  it('links to the official DFSPI social accounts', () => {
+    expect(socials).toEqual([
+      { name: 'Instagram', url: 'https://www.instagram.com/dfspuertoiguazu/?hl=es', icon: 'instagram' },
+      { name: 'Facebook', url: 'https://www.facebook.com/dfspuertoiguazu/?locale=es_LA', icon: 'facebook' },
+    ])
   })
 })

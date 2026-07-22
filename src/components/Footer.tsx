@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Clock3, Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react'
-import { logo, mapsUrl, storeAddress, storeCity, storeEmail, storePhone } from '../assets'
+import { footerLogo, mapsUrl, storeAddress, storeCity, storeEmail, storePhone } from '../assets'
 import { RESERVAS_ENABLED } from '../config'
 import { useLocale } from '../context/AppContext'
 import { socials } from '../siteContent'
@@ -13,7 +13,7 @@ export default function Footer() {
     <footer>
       <div className="footer-main">
         <div className="footer-brand">
-          <img src={logo} alt="Duty Free Shop Puerto Iguazú" />
+          <img src={footerLogo} alt="Duty Free Shop Puerto Iguazú" />
           <p>{tr('footerBody')}</p>
         </div>
         <div>
@@ -54,7 +54,7 @@ export default function Footer() {
                       key={social.name}
                       href={social.url}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label={social.name}
                     >
                       <Icon size={18} />

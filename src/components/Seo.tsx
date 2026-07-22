@@ -117,8 +117,8 @@ export default function Seo() {
           { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '12:00', closes: '21:00' },
         ],
         sameAs: [
-          'https://www.instagram.com/dutyfreeshoppuertoiguazu',
-          'https://www.facebook.com/dutyfreeshoppuertoiguazu',
+          'https://www.instagram.com/dfspuertoiguazu/?hl=es',
+          'https://www.facebook.com/dfspuertoiguazu/?locale=es_LA',
         ],
       },
       {
