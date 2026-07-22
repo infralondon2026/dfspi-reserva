@@ -1,26 +1,17 @@
 import type { Locale } from './types'
 
-/**
- * Contenido informativo del sitio (secciones institucionales).
- *
- * PARA REVISIÓN DE MARKETING: promociones bancarias, novedades, servicios y
- * redes sociales son contenido de ejemplo editable. Reemplazar por la
- * información oficial y vigente antes de publicar. Las promos bancarias son
- * afirmaciones comerciales: deben reflejar acuerdos reales y sus vigencias.
- */
-
 export interface PaymentMethod {
-  name: string
+  name: Record<Locale, string>
   icon: string
 }
 
 export const paymentMethods: PaymentMethod[] = [
-  { name: 'Visa', icon: '💳' },
-  { name: 'Mastercard', icon: '💳' },
-  { name: 'American Express', icon: '💳' },
-  { name: 'Débito', icon: '🏧' },
-  { name: 'PIX', icon: '📲' },
-  { name: 'Efectivo USD / ARS / BRL', icon: '💵' },
+  { name: { es: 'Visa', pt: 'Visa', en: 'Visa' }, icon: '💳' },
+  { name: { es: 'Mastercard', pt: 'Mastercard', en: 'Mastercard' }, icon: '💳' },
+  { name: { es: 'American Express', pt: 'American Express', en: 'American Express' }, icon: '💳' },
+  { name: { es: 'Visa Electron / Maestro', pt: 'Visa Electron / Maestro', en: 'Visa Electron / Maestro' }, icon: '🏧' },
+  { name: { es: 'PIX', pt: 'PIX', en: 'PIX' }, icon: '📲' },
+  { name: { es: 'Efectivo USD / ARS / BRL', pt: 'Dinheiro USD / ARS / BRL', en: 'Cash USD / ARS / BRL' }, icon: '💵' },
 ]
 
 export interface BankPromo {
@@ -31,39 +22,8 @@ export interface BankPromo {
   color: string
 }
 
-// PLACEHOLDER — reemplazar por las promociones bancarias vigentes reales.
-export const bankPromos: BankPromo[] = [
-  {
-    bank: 'Banco Macro',
-    title: { es: '3 cuotas sin interés', pt: '3 parcelas sem juros' },
-    detail: {
-      es: 'En compras con tarjeta de crédito Visa y Mastercard.',
-      pt: 'Em compras com cartão de crédito Visa e Mastercard.',
-    },
-    validity: { es: 'Todos los días', pt: 'Todos os dias' },
-    color: '#0B6EB6',
-  },
-  {
-    bank: 'Banco Nación',
-    title: { es: '15% de descuento', pt: '15% de desconto' },
-    detail: {
-      es: 'Los martes y jueves abonando con MODO.',
-      pt: 'Às terças e quintas pagando com MODO.',
-    },
-    validity: { es: 'Martes y jueves', pt: 'Terças e quintas' },
-    color: '#00695C',
-  },
-  {
-    bank: 'Banco Galicia',
-    title: { es: '6 cuotas sin interés', pt: '6 parcelas sem juros' },
-    detail: {
-      es: 'En perfumería y tecnología seleccionadas.',
-      pt: 'Em perfumaria e tecnologia selecionadas.',
-    },
-    validity: { es: 'Hasta fin de mes', pt: 'Até o fim do mês' },
-    color: '#C2185B',
-  },
-]
+// Se mantiene vacío hasta recibir promociones oficialmente aprobadas y vigentes.
+export const bankPromos: BankPromo[] = []
 
 export interface Service {
   icon: string
@@ -71,48 +31,51 @@ export interface Service {
   body: Record<Locale, string>
 }
 
-// PLACEHOLDER — ajustar a los servicios reales de la tienda.
+/** Servicios confirmados en la página oficial de preguntas frecuentes. */
 export const services: Service[] = [
   {
-    icon: '🧑‍💼',
-    title: { es: 'Asesoramiento personalizado', pt: 'Atendimento personalizado' },
-    body: {
-      es: 'Nuestro equipo te ayuda a elegir el regalo o producto ideal.',
-      pt: 'Nossa equipe ajuda você a escolher o presente ou produto ideal.',
-    },
-  },
-  {
-    icon: '🌐',
-    title: { es: 'Atención bilingüe', pt: 'Atendimento bilíngue' },
-    body: { es: 'Te atendemos en español y portugués.', pt: 'Atendemos em espanhol e português.' },
-  },
-  {
-    icon: '🎁',
-    title: { es: 'Empaque para regalo', pt: 'Embalagem para presente' },
-    body: {
-      es: 'Preparamos tu compra para que llegue lista para regalar.',
-      pt: 'Preparamos sua compra pronta para presentear.',
-    },
-  },
-  {
     icon: '🅿️',
-    title: { es: 'Estacionamiento', pt: 'Estacionamento' },
+    title: { es: 'Estacionamiento gratuito', pt: 'Estacionamento gratuito', en: 'Free parking' },
     body: {
-      es: 'Espacio disponible para que llegues cómodo a la tienda.',
-      pt: 'Espaço disponível para você chegar com conforto à loja.',
+      es: '450 plazas techadas y otras 500 al aire libre, con 4 espacios reservados para personas con discapacidad.',
+      pt: '450 vagas cobertas e outras 500 ao ar livre, com 4 espaços reservados para pessoas com deficiência.',
+      en: '450 covered spaces and another 500 outdoors, including 4 spaces reserved for visitors with disabilities.',
     },
   },
   {
-    icon: '📶',
-    title: { es: 'Wi-Fi gratuito', pt: 'Wi-Fi gratuito' },
-    body: { es: 'Conexión libre mientras recorrés la tienda.', pt: 'Conexão livre enquanto você percorre a loja.' },
+    icon: '♿',
+    title: { es: 'Accesos adaptados', pt: 'Acessos adaptados', en: 'Accessible entrances' },
+    body: {
+      es: 'Ascensores, rampas mecánicas y sectores de circulación preparados para personas con movilidad reducida.',
+      pt: 'Elevadores, rampas rolantes e áreas de circulação preparadas para pessoas com mobilidade reduzida.',
+      en: 'Lifts, moving ramps and circulation areas designed for visitors with reduced mobility.',
+    },
   },
   {
-    icon: '🛍️',
-    title: { es: 'Reserva online (próximamente)', pt: 'Reserva online (em breve)' },
+    icon: '🐕‍🦺',
+    title: { es: 'Ingreso de perros guía', pt: 'Acesso para cães-guia', en: 'Guide dogs welcome' },
     body: {
-      es: 'Muy pronto vas a poder reservar tus productos antes de viajar.',
-      pt: 'Em breve você poderá reservar seus produtos antes de viajar.',
+      es: 'Está permitido el ingreso de perros guía que acompañen a personas con discapacidad visual.',
+      pt: 'É permitida a entrada de cães-guia que acompanhem pessoas com deficiência visual.',
+      en: 'Guide dogs accompanying visitors with visual disabilities are welcome.',
+    },
+  },
+  {
+    icon: '🚻',
+    title: { es: 'Instalaciones accesibles', pt: 'Instalações acessíveis', en: 'Accessible facilities' },
+    body: {
+      es: 'Probadores y sanitarios adaptados, cajas preferenciales y mesas accesibles en el bar.',
+      pt: 'Provadores e banheiros adaptados, caixas preferenciais e mesas acessíveis no bar.',
+      en: 'Adapted fitting rooms and restrooms, priority checkouts and accessible tables in the bar.',
+    },
+  },
+  {
+    icon: '⠿',
+    title: { es: 'Menú en Braille', pt: 'Cardápio em Braille', en: 'Braille menu' },
+    body: {
+      es: 'El bar dispone de un menú en Braille para personas con discapacidad visual.',
+      pt: 'O bar oferece um cardápio em Braille para pessoas com deficiência visual.',
+      en: 'The bar provides a Braille menu for visitors with visual disabilities.',
     },
   },
 ]
@@ -124,36 +87,8 @@ export interface NewsItem {
   tag: Record<Locale, string>
 }
 
-// PLACEHOLDER — cargar las novedades reales de la tienda.
-export const news: NewsItem[] = [
-  {
-    date: { es: 'Julio 2026', pt: 'Julho 2026' },
-    tag: { es: 'Novedad', pt: 'Novidade' },
-    title: { es: 'Nuevas fragancias de temporada', pt: 'Novas fragrâncias da temporada' },
-    body: {
-      es: 'Sumamos los últimos lanzamientos de las casas de perfumería más reconocidas.',
-      pt: 'Adicionamos os últimos lançamentos das casas de perfumaria mais reconhecidas.',
-    },
-  },
-  {
-    date: { es: 'Julio 2026', pt: 'Julho 2026' },
-    tag: { es: 'Tecnología', pt: 'Tecnologia' },
-    title: { es: 'Llegó la nueva línea de audio', pt: 'Chegou a nova linha de áudio' },
-    body: {
-      es: 'Auriculares y parlantes de las mejores marcas, con precios duty free.',
-      pt: 'Fones e caixas de som das melhores marcas, com preços duty free.',
-    },
-  },
-  {
-    date: { es: 'Julio 2026', pt: 'Julho 2026' },
-    tag: { es: 'Evento', pt: 'Evento' },
-    title: { es: 'Semana de degustaciones', pt: 'Semana de degustações' },
-    body: {
-      es: 'Visitanos y descubrí nuestra selección de bebidas premium.',
-      pt: 'Visite-nos e descubra nossa seleção de bebidas premium.',
-    },
-  },
-]
+// Se mantiene vacío para no publicar novedades ficticias o vencidas.
+export const news: NewsItem[] = []
 
 export interface SocialLink {
   name: string
@@ -161,7 +96,6 @@ export interface SocialLink {
   icon: 'instagram' | 'facebook'
 }
 
-// PLACEHOLDER — confirmar las URLs oficiales de redes sociales.
 export const socials: SocialLink[] = [
   { name: 'Instagram', url: 'https://www.instagram.com/dutyfreeshoppuertoiguazu', icon: 'instagram' },
   { name: 'Facebook', url: 'https://www.facebook.com/dutyfreeshoppuertoiguazu', icon: 'facebook' },

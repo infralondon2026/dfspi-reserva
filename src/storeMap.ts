@@ -28,7 +28,7 @@ const CORAL = '#ef8a6f'
 export const storeSectors: StoreSector[] = [
   {
     id: 'istore',
-    name: { es: 'iStore', pt: 'iStore' },
+    name: { es: 'iStore', pt: 'iStore', en: 'iStore' },
     icon: '📱',
     color: NAVY,
     brands: ['Apple'],
@@ -36,7 +36,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'electronica',
-    name: { es: 'Electrónica', pt: 'Eletrônica' },
+    name: { es: 'Electrónica', pt: 'Eletrônica', en: 'Electronics' },
     icon: '🎧',
     color: NAVY,
     brands: ['Samsung', 'JBL', 'Bose', 'GoPro', 'Xiaomi'],
@@ -44,7 +44,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'cosmetica',
-    name: { es: 'Cosmética', pt: 'Cosmética' },
+    name: { es: 'Cosmética', pt: 'Cosmética', en: 'Cosmetics' },
     icon: '💄',
     color: TEAL,
     brands: ['Clinique', 'Estée Lauder', 'Lancôme', 'Clarins'],
@@ -52,7 +52,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'lentes-top',
-    name: { es: 'Lentes', pt: 'Óculos' },
+    name: { es: 'Lentes', pt: 'Óculos', en: 'Eyewear' },
     icon: '🕶️',
     color: CORAL,
     brands: ['Ray-Ban', 'Oakley'],
@@ -60,7 +60,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'tommy',
-    name: { es: 'Tommy Hilfiger', pt: 'Tommy Hilfiger' },
+    name: { es: 'Tommy Hilfiger', pt: 'Tommy Hilfiger', en: 'Tommy Hilfiger' },
     icon: '👕',
     color: NAVY,
     brands: ['Tommy Hilfiger'],
@@ -68,7 +68,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'perfumeria',
-    name: { es: 'Perfumería', pt: 'Perfumaria' },
+    name: { es: 'Perfumería', pt: 'Perfumaria', en: 'Fragrances' },
     icon: '🌸',
     color: TEAL,
     brands: ['Carolina Herrera', 'Giorgio Armani', 'Dior', 'Chanel', 'Paco Rabanne', 'Cacharel', 'Moncler'],
@@ -76,7 +76,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'jugueteria',
-    name: { es: 'Juguetería', pt: 'Brinquedos' },
+    name: { es: 'Juguetería', pt: 'Brinquedos', en: 'Toys' },
     icon: '🧸',
     color: CORAL,
     brands: ['LEGO', 'Playmobil', 'Hot Wheels'],
@@ -84,7 +84,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'bar-chivas',
-    name: { es: 'Bar de Chivas', pt: 'Bar de Chivas' },
+    name: { es: 'Bar de Chivas', pt: 'Bar de Chivas', en: 'Chivas Bar' },
     icon: '🥃',
     color: TEAL,
     brands: ['Chivas Regal'],
@@ -92,7 +92,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'equipajes',
-    name: { es: 'Equipajes', pt: 'Bagagens' },
+    name: { es: 'Equipajes', pt: 'Bagagens', en: 'Luggage' },
     icon: '🧳',
     color: TEAL,
     brands: ['Samsonite', 'Victorinox', 'Montblanc'],
@@ -100,7 +100,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'lentes-centro',
-    name: { es: 'Lentes', pt: 'Óculos' },
+    name: { es: 'Lentes', pt: 'Óculos', en: 'Eyewear' },
     icon: '👓',
     color: NAVY,
     brands: ['Ray-Ban', 'Persol', 'Vogue'],
@@ -108,7 +108,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'deportes',
-    name: { es: 'Deportes', pt: 'Esportes' },
+    name: { es: 'Deportes', pt: 'Esportes', en: 'Sports' },
     icon: '👟',
     color: TEAL,
     brands: ['Nike', 'adidas', 'Under Armour'],
@@ -116,7 +116,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 't-tommy',
-    name: { es: 'Tommy (accesorios)', pt: 'Tommy (acessórios)' },
+    name: { es: 'Tommy (accesorios)', pt: 'Tommy (acessórios)', en: 'Tommy (accessories)' },
     icon: '🧢',
     color: NAVY,
     brands: ['Tommy Hilfiger'],
@@ -124,7 +124,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'modas',
-    name: { es: 'Modas', pt: 'Moda' },
+    name: { es: 'Modas', pt: 'Moda', en: 'Fashion' },
     icon: '🧥',
     color: NAVY,
     brands: ['Lacoste', 'Calvin Klein', 'Guess'],
@@ -132,7 +132,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'victorias-secret',
-    name: { es: "Victoria's Secret", pt: "Victoria's Secret" },
+    name: { es: "Victoria's Secret", pt: "Victoria's Secret", en: "Victoria's Secret" },
     icon: '💗',
     color: CORAL,
     brands: ["Victoria's Secret"],
@@ -140,7 +140,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'bebidas',
-    name: { es: 'Bebidas', pt: 'Bebidas' },
+    name: { es: 'Bebidas', pt: 'Bebidas', en: 'Beverages' },
     icon: '🍸',
     color: NAVY,
     brands: ['Johnnie Walker', 'Jägermeister', 'Baileys', 'Absolut', 'Amarula'],
@@ -148,7 +148,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'vinos',
-    name: { es: 'Vinos', pt: 'Vinhos' },
+    name: { es: 'Vinos', pt: 'Vinhos', en: 'Wines' },
     icon: '🍷',
     color: NAVY,
     brands: ['Moët & Chandon', 'Chandon', 'Rutini'],
@@ -156,7 +156,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'comestibles',
-    name: { es: 'Comestibles', pt: 'Comestíveis' },
+    name: { es: 'Comestibles', pt: 'Comestíveis', en: 'Food' },
     icon: '🍫',
     color: CORAL,
     brands: ['Lindt', 'Toblerone', 'Ferrero Rocher', 'Godiva'],
@@ -164,7 +164,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'mac',
-    name: { es: 'MAC', pt: 'MAC' },
+    name: { es: 'MAC', pt: 'MAC', en: 'MAC' },
     icon: '💅',
     color: TEAL,
     brands: ['MAC Cosmetics'],
@@ -172,7 +172,7 @@ export const storeSectors: StoreSector[] = [
   },
   {
     id: 'bazar',
-    name: { es: 'Bazar', pt: 'Bazar' },
+    name: { es: 'Bazar', pt: 'Bazar', en: 'Gifts' },
     icon: '🎁',
     color: TEAL,
     brands: ['Regalería', 'Souvenirs'],

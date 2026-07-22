@@ -56,14 +56,14 @@ function mapProduct(row: ProductRow): Product | null {
     id: variant.id,
     brand: row.brand,
     name: row.name,
-    subtitle: { es: row.subtitle_es, pt: row.subtitle_pt },
+    subtitle: { es: row.subtitle_es, pt: row.subtitle_pt, en: row.subtitle_es },
     category,
     image: row.image_url,
     price: Number(row.price_usd),
     originalPrice: row.original_price_usd != null ? Number(row.original_price_usd) : undefined,
     stock: available,
     featured: row.featured,
-    description: { es: row.description_es, pt: row.description_pt },
+    description: { es: row.description_es, pt: row.description_pt, en: row.description_es },
   }
 }
 

@@ -8,7 +8,7 @@ import { socials } from '../siteContent'
 const SOCIAL_ICON = { instagram: Instagram, facebook: Facebook }
 
 export default function Footer() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   return (
     <footer>
       <div className="footer-main">
@@ -18,15 +18,15 @@ export default function Footer() {
         </div>
         <div>
           <h4>{tr('store')}</h4>
-          <Link to="/catalogo">{tr('navCatalog')}</Link>
-          <Link to="/#ofertas">{tr('navOffers')}</Link>
-          <Link to="/#mapa">{tr('navStore')}</Link>
-          {RESERVAS_ENABLED && <Link to="/mi-reserva">{tr('navReservation')}</Link>}
+          <Link to={path('/catalogo')}>{tr('navCatalog')}</Link>
+          <Link to={path('/#ofertas')}>{tr('navOffers')}</Link>
+          <Link to={path('/#mapa')}>{tr('navStore')}</Link>
+          {RESERVAS_ENABLED && <Link to={path('/mi-reserva')}>{tr('navReservation')}</Link>}
         </div>
         <div>
           <h4>{tr('help')}</h4>
-          <Link to="/#faq">FAQs</Link>
-          <Link to="/legales">{tr('conditions')}</Link>
+          <Link to={path('/#faq')}>FAQs</Link>
+          <Link to={path('/legales')}>{tr('conditions')}</Link>
           <a href={`mailto:${storeEmail}`}>{tr('contact')}</a>
         </div>
         <div>
@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} DFSPI · {tr('rights')}</span>
-        <Link to="/equipo">{tr('admin')}</Link>
+        <Link to={path('/equipo')}>{tr('admin')}</Link>
         <a href="https://londonsupplygroup.com" target="_blank" rel="noreferrer">
           {tr('companyOf')} <b>London Supply Group</b>
         </a>

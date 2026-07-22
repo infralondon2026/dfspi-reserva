@@ -1,10 +1,10 @@
 import type { Locale } from './types'
 
-export const ui = {
+const uiBase = {
   es: {
     // Announcement bar & header
     announcement: 'Marcas internacionales con precios libres de impuestos',
-    hours: 'Todos los días · 12 a 20 h (AR)',
+    hours: 'Dom–Jue 12 a 20 h · Vie–Sáb 12 a 21 h (AR)',
     navHome: 'Inicio',
     navCatalog: 'Catálogo',
     navStore: 'La tienda',
@@ -30,8 +30,8 @@ export const ui = {
     trust1b: 'Las casas más deseadas del mundo',
     trust2: 'Precios duty free',
     trust2b: 'Libres de impuestos',
-    trust3: 'Atención bilingüe',
-    trust3b: 'Español y portugués',
+    trust3: 'Información trilingüe',
+    trust3b: 'Español, portugués e inglés',
 
     // Categories showcase
     categoriesKicker: 'EXPLORÁ POR CATEGORÍA',
@@ -51,9 +51,9 @@ export const ui = {
 
     // Ofertas
     offersKicker: 'OFERTAS DESTACADAS',
-    offersTitle: 'Descuentos para tu viaje',
-    offersBody: 'Aprovechá precios rebajados en una selección de marcas premium.',
-    offersCta: 'Ver todas las ofertas',
+    offersTitle: 'Promociones para tu viaje',
+    offersBody: 'Consultá en tienda las promociones vigentes y sus condiciones.',
+    offersCta: 'Ver productos destacados',
     offBadge: 'OFF',
     saveLabel: 'Ahorrás',
 
@@ -101,10 +101,19 @@ export const ui = {
 
     // FAQ & visit
     faqHeadTitle: 'Antes de viajar, resolvé tus dudas.',
-    faqCta: 'Consultar reserva',
+    faqCta: 'Contactanos',
+    visitorKicker: 'INFORMACIÓN PARA TU VISITA',
+    visitorTitle: 'Todo lo que necesitás saber antes de viajar.',
+    visitorBody: 'Revisá los requisitos de acceso y las condiciones aduaneras de tu país de destino.',
+    visitorAccessTitle: 'Acceso y documentación',
+    visitorAccessBody: 'Para ingresar al predio debés registrar tu salida ante la aduana del país de procedencia y presentar la documentación migratoria requerida.',
+    visitorCustomsTitle: 'Compras y franquicias',
+    visitorCustomsBody: 'La tienda no fija límites mientras no se presuma fin comercial. Las franquicias y límites de ingreso dependen del país de destino.',
+    visitorTransportTitle: 'Cómo llegar',
+    visitorTransportBody: 'Estamos en el Paso de Frontera, Ruta Nacional 12, km 1645,5. No contamos con traslados propios; consultá servicios de transporte local.',
     visitKicker: 'TU PRÓXIMA PARADA',
     visitTitle: 'Una experiencia única en la frontera.',
-    visitDays: 'Todos los días',
+    visitDays: 'Dom–Jue 12–20 h · Vie–Sáb 12–21 h',
     visitMap: 'Ver en Google Maps',
 
     // Final CTA
@@ -116,7 +125,7 @@ export const ui = {
     // Catalog
     catalogKicker: 'DUTY FREE COLLECTION',
     catalogTitle: 'Encontrá tu próximo favorito.',
-    catalogBody: 'Precios exclusivos, marcas internacionales y retiro en tienda.',
+    catalogBody: 'Conocé algunas de las categorías y marcas que podés encontrar en nuestra tienda.',
     search: 'Buscar productos, marcas...',
     all: 'Todos',
     perfumes: 'Perfumes',
@@ -206,7 +215,7 @@ export const ui = {
 
     // Legal
     legalKicker: 'INFORMACIÓN LEGAL',
-    legalTitle: 'Condiciones de reserva y privacidad',
+    legalTitle: 'Privacidad e información del sitio',
 
     // Admin
     panelInternal: 'PANEL INTERNO',
@@ -236,7 +245,7 @@ export const ui = {
     stockLabel: 'Stock',
 
     // Footer & misc
-    footerBody: 'Marcas internacionales, una experiencia única y la comodidad de reservar antes de viajar.',
+    footerBody: 'Marcas internacionales, servicios para tu visita y una experiencia única en la frontera.',
     store: 'Tienda',
     help: 'Ayuda',
     company: 'London Supply Group',
@@ -285,7 +294,7 @@ export const ui = {
   pt: {
     // Announcement bar & header
     announcement: 'Marcas internacionais com preços livres de impostos',
-    hours: 'Todos os dias · 12h às 20h (AR)',
+    hours: 'Dom–Qui 12h–20h · Sex–Sáb 12h–21h (AR)',
     navHome: 'Início',
     navCatalog: 'Catálogo',
     navStore: 'A loja',
@@ -311,8 +320,8 @@ export const ui = {
     trust1b: 'As casas mais desejadas do mundo',
     trust2: 'Preços duty free',
     trust2b: 'Livres de impostos',
-    trust3: 'Atendimento bilíngue',
-    trust3b: 'Espanhol e português',
+    trust3: 'Informação trilíngue',
+    trust3b: 'Espanhol, português e inglês',
 
     // Categories showcase
     categoriesKicker: 'EXPLORE POR CATEGORIA',
@@ -332,9 +341,9 @@ export const ui = {
 
     // Ofertas
     offersKicker: 'OFERTAS EM DESTAQUE',
-    offersTitle: 'Descontos para sua viagem',
-    offersBody: 'Aproveite preços reduzidos em uma seleção de marcas premium.',
-    offersCta: 'Ver todas as ofertas',
+    offersTitle: 'Promoções para sua viagem',
+    offersBody: 'Consulte na loja as promoções vigentes e suas condições.',
+    offersCta: 'Ver produtos em destaque',
     offBadge: 'OFF',
     saveLabel: 'Você economiza',
 
@@ -382,10 +391,19 @@ export const ui = {
 
     // FAQ & visit
     faqHeadTitle: 'Antes de viajar, tire suas dúvidas.',
-    faqCta: 'Consultar reserva',
+    faqCta: 'Fale conosco',
+    visitorKicker: 'INFORMAÇÕES PARA SUA VISITA',
+    visitorTitle: 'Tudo o que você precisa saber antes de viajar.',
+    visitorBody: 'Confira os requisitos de acesso e as condições aduaneiras do seu país de destino.',
+    visitorAccessTitle: 'Acesso e documentação',
+    visitorAccessBody: 'Para entrar no estabelecimento, registre sua saída na aduana do país de origem e apresente a documentação migratória exigida.',
+    visitorCustomsTitle: 'Compras e franquias',
+    visitorCustomsBody: 'A loja não estabelece limites desde que não haja finalidade comercial. As franquias e limites dependem do país de destino.',
+    visitorTransportTitle: 'Como chegar',
+    visitorTransportBody: 'Estamos na passagem de fronteira, Ruta Nacional 12, km 1645,5. Não oferecemos transporte próprio; consulte serviços locais.',
     visitKicker: 'SUA PRÓXIMA PARADA',
     visitTitle: 'Uma experiência única na fronteira.',
-    visitDays: 'Todos os dias',
+    visitDays: 'Dom–Qui 12h–20h · Sex–Sáb 12h–21h',
     visitMap: 'Ver no Google Maps',
 
     // Final CTA
@@ -397,7 +415,7 @@ export const ui = {
     // Catalog
     catalogKicker: 'DUTY FREE COLLECTION',
     catalogTitle: 'Encontre seu próximo favorito.',
-    catalogBody: 'Preços exclusivos, marcas internacionais e retirada na loja.',
+    catalogBody: 'Conheça algumas das categorias e marcas disponíveis em nossa loja.',
     search: 'Buscar produtos, marcas...',
     all: 'Todos',
     perfumes: 'Perfumes',
@@ -487,7 +505,7 @@ export const ui = {
 
     // Legal
     legalKicker: 'INFORMAÇÃO LEGAL',
-    legalTitle: 'Condições de reserva e privacidade',
+    legalTitle: 'Privacidade e informações do site',
 
     // Admin
     panelInternal: 'PAINEL INTERNO',
@@ -517,7 +535,7 @@ export const ui = {
     stockLabel: 'Estoque',
 
     // Footer & misc
-    footerBody: 'Marcas internacionais, uma experiência única e a comodidade de reservar antes de viajar.',
+    footerBody: 'Marcas internacionais, serviços para sua visita e uma experiência única na fronteira.',
     store: 'Loja',
     help: 'Ajuda',
     company: 'London Supply Group',
@@ -565,6 +583,159 @@ export const ui = {
   },
 } as const
 
+type UiDictionary = { [K in keyof typeof uiBase.es]: string }
+
+const en: UiDictionary = {
+  ...uiBase.es,
+  announcement: 'International brands at duty-free prices',
+  hours: 'Sun–Thu 12:00–20:00 · Fri–Sat 12:00–21:00 (AR)',
+  navHome: 'Home',
+  navCatalog: 'Catalog',
+  navStore: 'The store',
+  navOffers: 'Offers',
+  navHow: 'How it works',
+  navFaq: 'Help',
+  navReservation: 'My reservation',
+  changeLanguage: 'Change language',
+  menu: 'Menu',
+  heroEyebrow: 'DUTY FREE · PUERTO IGUAZÚ',
+  heroTitle: 'The duty-free world, right at the border.',
+  heroBody: 'Fragrances, beverages, technology and delicatessen from leading international brands in Puerto Iguazú.',
+  heroOffers: 'View offers',
+  explore: 'Explore catalog',
+  how: 'How it works',
+  reserve: 'Reserve now',
+  heroLocation: 'Puerto Iguazú, Misiones',
+  trust1: 'International brands',
+  trust1b: 'Leading brands from around the world',
+  trust2: 'Duty-free shopping',
+  trust2b: 'A unique border experience',
+  trust3: 'Information in three languages',
+  trust3b: 'Spanish, Portuguese and English',
+  categoriesKicker: 'EXPLORE BY CATEGORY',
+  categoriesTitle: 'A world of brands at the border.',
+  categoriesBody: 'Fragrances, beverages, delicatessen and technology from international brands.',
+  catPerfumesB: 'Iconic fragrances from renowned houses.',
+  catBebidasB: 'Whiskies, liqueurs, wines and award-winning labels.',
+  catDelicatessenB: 'Chocolates and flavors from around the world.',
+  catTecnologiaB: 'The latest in audio and accessories.',
+  viewCategory: 'View products',
+  curationKicker: 'DFSPI SELECTION',
+  featured: 'Selected for your trip',
+  featuredBody: 'Products chosen to surprise, give and enjoy.',
+  viewAll: 'View all',
+  offersKicker: 'FEATURED OFFERS',
+  offersTitle: 'Discover our in-store offers',
+  offersBody: 'Visit the store to learn about current promotions and their terms.',
+  offersCta: 'View featured products',
+  offBadge: 'OFF',
+  saveLabel: 'You save',
+  mapKicker: 'INSIDE THE STORE',
+  mapTitle: 'Explore every department',
+  mapBody: 'Browse the store map and discover the brands available in each area.',
+  mapHint: 'Select an area on the map to view its brands',
+  mapBrandsLabel: 'Brands in this area',
+  mapPickPrompt: 'Choose an area to view its brands',
+  mapEntrance: 'Entrance',
+  mapCheckout: 'Checkouts',
+  brandsKicker: 'FEATURED BRANDS',
+  testimonialsKicker: 'EXPERIENCES',
+  testimonialsTitle: 'A unique shopping experience.',
+  faqHeadTitle: 'Plan your visit with reliable information.',
+  faqCta: 'Contact us',
+  visitorKicker: 'VISITOR INFORMATION',
+  visitorTitle: 'Everything you need to know before you travel.',
+  visitorBody: 'Review access requirements and the customs rules of your destination country.',
+  visitorAccessTitle: 'Access and documents',
+  visitorAccessBody: 'To enter the premises, register your departure with the customs authority of your country of origin and carry the required migration documents.',
+  visitorCustomsTitle: 'Purchases and allowances',
+  visitorCustomsBody: 'The store does not impose limits unless a commercial purpose is presumed. Customs allowances and entry limits depend on the destination country.',
+  visitorTransportTitle: 'Getting here',
+  visitorTransportBody: 'We are at the border crossing on National Route 12, km 1645.5. We do not operate transportation; please contact a local service.',
+  visitKicker: 'YOUR NEXT STOP',
+  visitTitle: 'A unique experience at the border.',
+  visitDays: 'Sun–Thu 12:00–20:00 · Fri–Sat 12:00–21:00',
+  visitMap: 'Open in Google Maps',
+  ctaTitle: 'Visiting us on your next trip?',
+  ctaBody: 'Discover everything waiting for you in Puerto Iguazú, on the way to the Falls.',
+  ctaButton: 'View catalog',
+  inStoreOnly: 'Available at our physical store',
+  catalogKicker: 'DUTY FREE COLLECTION',
+  catalogTitle: 'Discover our product categories.',
+  catalogBody: 'Explore some of the categories and brands available at our store.',
+  search: 'Search products or brands...',
+  all: 'All',
+  perfumes: 'Fragrances',
+  bebidas: 'Beverages',
+  delicatessen: 'Delicatessen',
+  tecnologia: 'Technology',
+  productsWord: 'products',
+  sortRecommended: 'Recommended',
+  sortPriceAsc: 'Lowest price',
+  sortPriceDesc: 'Highest price',
+  sortDiscount: 'Best offers',
+  sortLabel: 'Sort by',
+  noResults: 'No results found',
+  price: 'Duty Free price',
+  available: 'Available',
+  lastUnits: 'Last units',
+  add: 'Add',
+  added: 'Added',
+  details: 'View details',
+  favorite: 'Favorite',
+  back: 'Back',
+  inStock: 'in stock',
+  loading: 'Loading...',
+  chatGreeting: 'Hello! I am the DFSPI information assistant. How can I help?',
+  chatNeedHelp: 'Need help?',
+  chatAssistant: 'DFSPI Assistant',
+  chatOnline: 'Online',
+  chatVerified: 'Official, verified answers',
+  ask: 'Type your question...',
+  send: 'Send',
+  fallback: 'I could not find an exact answer. Email info@dfspi.com or call +54 3757 421050.',
+  faqTitle: 'How can we help?',
+  faqBody: 'Our assistant answers using official DFSPI information.',
+  legalKicker: 'LEGAL INFORMATION',
+  legalTitle: 'Privacy and website information',
+  footerBody: 'International brands, visitor services and a unique experience at the border.',
+  store: 'Store',
+  help: 'Help',
+  rights: 'All rights reserved.',
+  admin: 'Team access',
+  conditions: 'Legal information',
+  contact: 'Contact',
+  visitUs: 'Visit us',
+  companyOf: 'A company of',
+  backToTop: 'Back to top',
+  pageNotFound: 'Page not found',
+  payKicker: 'PAYMENT METHODS',
+  payTitle: 'Choose the most convenient way to pay',
+  payBody: 'We accept major cards, PIX and cash in three currencies.',
+  promoKicker: 'PROMOTIONS',
+  promoTitle: 'Current benefits',
+  promoBody: 'Check current promotions and payment conditions in store.',
+  promoValidityLabel: 'Valid',
+  promoDisclaimer: 'Promotions are subject to their specific terms and conditions. Check validity in store.',
+  newsKicker: 'NEWS',
+  newsTitle: 'Store news',
+  newsBody: 'Discover launches, events and news before your visit.',
+  servicesKicker: 'VISITOR SERVICES',
+  servicesTitle: 'Designed for a comfortable visit',
+  servicesBody: 'Accessibility and services available throughout the store.',
+  newsletterKicker: 'NEWSLETTER',
+  newsletterTitle: 'Receive our latest news',
+  newsletterBody: 'Get promotions, launches and store news by email.',
+  newsletterPlaceholder: 'Your email',
+  newsletterButton: 'Subscribe',
+  newsletterOk: 'You are now subscribed!',
+  newsletterError: 'We could not complete your subscription. Please try again.',
+  newsletterPrivacy: 'We only use your email to send store news. You may unsubscribe at any time.',
+  socialFollow: 'Follow us',
+}
+
+export const ui = { ...uiBase, en } as const
+
 export type UiKey = keyof typeof ui.es
 
 export const t = (locale: Locale, key: UiKey): string => ui[locale][key]
@@ -577,46 +748,56 @@ export interface LegalSection {
 export const legalSections: Record<Locale, LegalSection[]> = {
   es: [
     {
-      title: 'Naturaleza de la reserva',
-      body: 'La reserva aparta productos hasta el cierre de la fecha elegida. No constituye una compra ni requiere pago online. Los precios se expresan en dólares estadounidenses y el pago se completa en tienda.',
+      title: 'Información del sitio',
+      body: 'Este sitio brinda información general sobre Duty Free Shop Puerto Iguazú. Los horarios, promociones, marcas y servicios pueden cambiar; verificá la información vigente antes de viajar.',
     },
     {
-      title: 'Retiro y vencimiento',
-      body: 'La persona titular debe presentar el código de reserva y documentación válida. Las reservas no retiradas se cancelan automáticamente al finalizar el día seleccionado.',
+      title: 'Compras y requisitos aduaneros',
+      body: 'Las compras se realizan únicamente en la tienda física. Los límites y franquicias dependen del país de destino. Para ingresar al predio se debe registrar la salida ante la aduana del país de procedencia y presentar la documentación requerida.',
     },
     {
-      title: 'Disponibilidad y límites',
-      body: 'El stock se descuenta al confirmar. DFSPI podrá cancelar una reserva por errores manifiestos de inventario, informando al cliente por email. La compra está sujeta a franquicias aduaneras y no puede presumir fin comercial.',
-    },
-    {
-      title: 'Datos personales',
-      body: 'Nombre, email y teléfono se utilizan para administrar la reserva y comunicaciones relacionadas. No se venden a terceros. El titular puede solicitar acceso o eliminación escribiendo a info@dfspi.com.',
+      title: 'Privacidad',
+      body: 'Los datos enviados mediante formularios se utilizan únicamente para responder consultas o enviar novedades solicitadas. Podés pedir acceso, corrección o eliminación escribiendo a info@dfspi.com.',
     },
     {
       title: 'Cambios',
-      body: 'Los productos adquiridos en tienda se cambian por fallas de fabricación, sin uso, con embalaje y ticket originales, según el plazo informado en tienda.',
+      body: 'Los productos con fallas o defectos de fabricación pueden cambiarse si no fueron utilizados, están en perfectas condiciones, conservan su embalaje original y se presenta el ticket original. Consultá el plazo aplicable en la tienda.',
     },
   ],
   pt: [
     {
-      title: 'Natureza da reserva',
-      body: 'A reserva separa produtos até o fechamento da data escolhida. Não constitui compra nem exige pagamento online. Os preços estão em dólares e o pagamento é feito na loja.',
+      title: 'Informações do site',
+      body: 'Este site fornece informações gerais sobre o Duty Free Shop Puerto Iguazú. Horários, promoções, marcas e serviços podem mudar; confirme as informações vigentes antes de viajar.',
     },
     {
-      title: 'Retirada e vencimento',
-      body: 'O titular deve apresentar o código e documentação válida. Reservas não retiradas são canceladas automaticamente ao fim do dia escolhido.',
+      title: 'Compras e requisitos aduaneiros',
+      body: 'As compras são realizadas somente na loja física. Limites e franquias dependem do país de destino. Para entrar no estabelecimento, registre a saída na aduana do país de origem e apresente a documentação exigida.',
     },
     {
-      title: 'Disponibilidade e limites',
-      body: 'O estoque é descontado na confirmação. O DFSPI pode cancelar por erro manifesto de inventário, avisando por email. A compra está sujeita às franquias aduaneiras.',
-    },
-    {
-      title: 'Dados pessoais',
-      body: 'Nome, email e telefone são usados para administrar a reserva e comunicações relacionadas. O titular pode solicitar acesso ou exclusão em info@dfspi.com.',
+      title: 'Privacidade',
+      body: 'Os dados enviados pelos formulários são usados somente para responder consultas ou enviar novidades solicitadas. Você pode pedir acesso, correção ou exclusão escrevendo para info@dfspi.com.',
     },
     {
       title: 'Trocas',
-      body: 'Produtos comprados na loja são trocados por defeito de fabricação, sem uso, com embalagem e comprovante originais, conforme prazo informado na loja.',
+      body: 'Produtos com falhas ou defeitos de fabricação podem ser trocados se não tiverem sido usados, estiverem em perfeitas condições, com embalagem original e comprovante de compra. Consulte o prazo na loja.',
+    },
+  ],
+  en: [
+    {
+      title: 'Website information',
+      body: 'This website provides general information about Duty Free Shop Puerto Iguazú. Opening hours, promotions, brands and services may change; confirm current information before traveling.',
+    },
+    {
+      title: 'Purchases and customs requirements',
+      body: 'Purchases are made exclusively at the physical store. Limits and allowances depend on the destination country. To enter the premises, register your departure with the customs authority of your country of origin and carry the required documents.',
+    },
+    {
+      title: 'Privacy',
+      body: 'Information submitted through forms is used only to answer enquiries or send requested news. You may request access, correction or deletion by emailing info@dfspi.com.',
+    },
+    {
+      title: 'Exchanges',
+      body: 'Products with manufacturing faults or defects may be exchanged if unused, in perfect condition, in their original packaging and accompanied by the original receipt. Ask in store about the applicable period.',
     },
   ],
 }

@@ -8,7 +8,7 @@ import CartPage from './CartPage'
 
 export default function Checkout() {
   const navigate = useNavigate()
-  const { locale, tr } = useLocale()
+  const { locale, tr, path } = useLocale()
   const { store, reload } = useStoreData()
   const { cart, clear } = useCart()
   const [busy, setBusy] = useState(false)
@@ -39,7 +39,7 @@ export default function Checkout() {
       sessionStorage.setItem('dfspi-last-reservation', JSON.stringify(reservation))
       clear()
       void reload()
-      navigate('/confirmacion')
+      navigate(path('/confirmacion'))
     } catch {
       setError(tr('availabilityChanged'))
     } finally {
@@ -94,7 +94,7 @@ export default function Checkout() {
         <label className="terms">
           <input type="checkbox" required />
           <span>
-            {tr('terms')} <Link to="/legales">{tr('readTerms')}</Link>
+            {tr('terms')} <Link to={path('/legales')}>{tr('readTerms')}</Link>
           </span>
         </label>
         {error && <p className="form-error">{error}</p>}

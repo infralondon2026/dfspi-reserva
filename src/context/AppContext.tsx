@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { usePersisted } from '../hooks'
 import { t, type UiKey } from '../i18n'
 import { getStore, type StoreAdapter } from '../store'
@@ -18,6 +19,7 @@ interface LocaleContextValue {
   locale: Locale
   setLocale: (locale: Locale) => void
   tr: (key: UiKey) => string
+  path: (target: string) => string
 }
 
 const LocaleContext = createContext<LocaleContextValue | null>(null)
@@ -50,7 +52,39 @@ const CartContext = createContext<CartContextValue | null>(null)
 // --- Provider ----------------------------------------------------------------
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = usePersisted<Locale>('dfspi-locale', 'es')
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [storedLocale, setStoredLocale] = usePersisted<Locale>('dfspi-locale', 'es')
+  const firstSegment = location.pathname.split('/').filter(Boolean)[0]
+  const routeLocale: Locale | undefined = ['es', 'pt', 'en'].includes(firstSegment)
+    ? (firstSegment as Locale)
+    : undefined
+  const locale = routeLocale ?? storedLocale
+
+  useEffect(() => {
+    if (routeLocale && routeLocale !== storedLocale) setStoredLocale(routeLocale)
+  }, [routeLocale, setStoredLocale, storedLocale])
+
+  const setLocale = useCallback(
+    (next: Locale) => {
+      setStoredLocale(next)
+      const parts = location.pathname.split('/').filter(Boolean)
+      if (parts.length && ['es', 'pt', 'en'].includes(parts[0])) parts[0] = next
+      else parts.unshift(next)
+      const pathname = `/${parts.join('/')}${location.pathname.endsWith('/') ? '/' : ''}`
+      navigate(`${pathname}${location.search}${location.hash}`, { replace: true })
+    },
+    [location.hash, location.pathname, location.search, navigate, setStoredLocale],
+  )
+
+  const path = useCallback(
+    (target: string) => {
+      const normalized = target.startsWith('/') ? target : `/${target}`
+      if (normalized === '/') return `/${locale}/`
+      return `/${locale}${normalized}`
+    },
+    [locale],
+  )
   const tr = useCallback((key: UiKey) => t(locale, key), [locale])
 
   const store = useMemo(() => getStore(), [])
@@ -115,7 +149,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [setFavorites],
   )
 
-  const localeValue = useMemo(() => ({ locale, setLocale, tr }), [locale, setLocale, tr])
+  const localeValue = useMemo(() => ({ locale, setLocale, tr, path }), [locale, setLocale, tr, path])
   const storeValue = useMemo(
     () => ({ store, products, loading, reload }),
     [store, products, loading, reload],

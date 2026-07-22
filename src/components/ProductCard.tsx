@@ -7,7 +7,7 @@ import { useCart, useLocale } from '../context/AppContext'
 import type { Product } from '../types'
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { locale, tr } = useLocale()
+  const { locale, tr, path } = useLocale()
   const { add, favorites, toggleFavorite } = useCart()
   const [done, setDone] = useState(false)
   const favorite = favorites.includes(product.id)
@@ -21,10 +21,10 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="product-card">
       <div className="product-image">
-        <Link to={`/producto/${product.id}`}>
+        <Link to={path(`/producto/${product.id}`)}>
           <img src={resolveImage(product.image)} alt={`${product.brand} ${product.name}`} loading="lazy" />
         </Link>
-        {product.originalPrice && (
+        {RESERVAS_ENABLED && product.originalPrice && (
           <span className="sale">-{Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
         )}
         {RESERVAS_ENABLED && (
@@ -39,7 +39,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="product-info">
         <span className="brand-name">{product.brand}</span>
-        <Link to={`/producto/${product.id}`}>
+        <Link to={path(`/producto/${product.id}`)}>
           <h3>{product.name}</h3>
         </Link>
         <p>{product.subtitle[locale]}</p>
@@ -50,18 +50,22 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         )}
         <div className="product-bottom">
-          <div className="price">
-            <small>USD</small>
-            <strong>{product.price}</strong>
-            {product.originalPrice && <del>${product.originalPrice}</del>}
-          </div>
+          {RESERVAS_ENABLED ? (
+            <div className="price">
+              <small>USD</small>
+              <strong>{product.price}</strong>
+              {product.originalPrice && <del>${product.originalPrice}</del>}
+            </div>
+          ) : (
+            <span className="catalog-store-only">{tr('inStoreOnly')}</span>
+          )}
           {RESERVAS_ENABLED ? (
             <button onClick={handleAdd} className={done ? 'add-button done' : 'add-button'}>
               {done ? <Check size={19} /> : <Plus size={19} />}
               <span>{done ? tr('added') : tr('add')}</span>
             </button>
           ) : (
-            <Link to={`/producto/${product.id}`} className="add-button ghost-link" aria-label={tr('details')}>
+            <Link to={path(`/producto/${product.id}`)} className="add-button ghost-link" aria-label={tr('details')}>
               <span>{tr('details')}</span>
               <ArrowRight size={17} />
             </Link>

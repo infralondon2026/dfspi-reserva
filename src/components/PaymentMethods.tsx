@@ -4,7 +4,7 @@ import { paymentMethods } from '../siteContent'
 import Reveal from './Reveal'
 
 export default function PaymentMethods() {
-  const { tr } = useLocale()
+  const { locale, tr } = useLocale()
   return (
     <section id="pagos" className="section payments-section">
       <Reveal>
@@ -21,9 +21,9 @@ export default function PaymentMethods() {
       <Reveal>
         <div className="payment-grid">
           {paymentMethods.map(method => (
-            <div className="payment-chip" key={method.name}>
+            <div className="payment-chip" key={method.name.en}>
               <span className="payment-icon">{method.icon}</span>
-              {method.name}
+              {method.name[locale]}
             </div>
           ))}
         </div>

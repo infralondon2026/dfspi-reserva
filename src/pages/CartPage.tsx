@@ -4,7 +4,7 @@ import { resolveImage } from '../assets'
 import { useCart, useLocale, useStoreData } from '../context/AppContext'
 
 export default function CartPage() {
-  const { locale, tr } = useLocale()
+  const { locale, tr, path } = useLocale()
   const { products } = useStoreData()
   const { cart, update } = useCart()
 
@@ -19,7 +19,7 @@ export default function CartPage() {
         <ShoppingBag />
         <h1>{tr('emptyCart')}</h1>
         <p>{tr('emptyCartBody')}</p>
-        <Link to="/catalogo" className="button navy">
+        <Link to={path('/catalogo')} className="button navy">
           {tr('continue')}
         </Link>
       </div>
@@ -74,7 +74,7 @@ export default function CartPage() {
           <p>
             <ShieldCheck /> {tr('payStore')}
           </p>
-          <Link to="/checkout" className="button gold wide">
+          <Link to={path('/checkout')} className="button gold wide">
             {tr('checkout')} <ArrowRight />
           </Link>
         </aside>

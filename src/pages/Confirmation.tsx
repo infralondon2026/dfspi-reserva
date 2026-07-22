@@ -7,7 +7,7 @@ import type { Reservation } from '../types'
 import NotFound from './NotFound'
 
 export default function Confirmation() {
-  const { locale, tr } = useLocale()
+  const { locale, tr, path } = useLocale()
   const { store } = useStoreData()
 
   let reservation: Reservation | null = null
@@ -41,7 +41,7 @@ export default function Confirmation() {
             {tr('pickup')}
             <b>
               {new Date(reservation.pickupDate + 'T12:00:00').toLocaleDateString(
-                locale === 'es' ? 'es-AR' : 'pt-BR',
+                locale === 'es' ? 'es-AR' : locale === 'pt' ? 'pt-BR' : 'en-US',
                 { weekday: 'long', day: 'numeric', month: 'long' },
               )}
             </b>
@@ -62,10 +62,10 @@ export default function Confirmation() {
         </p>
       )}
       <div className="confirmation-actions">
-        <Link className="button navy" to="/">
+        <Link className="button navy" to={path('/')}>
           {tr('backHome')}
         </Link>
-        <Link className="button outline" to="/mi-reserva">
+        <Link className="button outline" to={path('/mi-reserva')}>
           {tr('navReservation')}
         </Link>
       </div>

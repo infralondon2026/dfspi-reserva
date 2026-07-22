@@ -10,6 +10,7 @@ import Reveal from '../components/Reveal'
 import Services from '../components/Services'
 import StoreMap from '../components/StoreMap'
 import StoreNews from '../components/StoreNews'
+import VisitorInfo from '../components/VisitorInfo'
 import { RESERVAS_ENABLED } from '../config'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { UiKey } from '../i18n'
@@ -27,10 +28,11 @@ export default function Home() {
       <FeaturedSection />
       <StoreMap />
       <BrandMarquee />
+      <VisitorInfo />
       <Services />
       <PaymentMethods />
       {RESERVAS_ENABLED && <HowSection />}
-      <Testimonials />
+      {RESERVAS_ENABLED && <Testimonials />}
       <FaqSection />
       <VisitSection />
       <Newsletter />
@@ -39,7 +41,7 @@ export default function Home() {
 }
 
 function Hero() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   return (
     <section className="hero">
       <div className="hero-media">
@@ -51,10 +53,10 @@ function Hero() {
         <h1>{tr('heroTitle')}</h1>
         <p>{tr('heroBody')}</p>
         <div className="hero-buttons">
-          <Link className="button gold" to="/catalogo">
+          <Link className="button gold" to={path('/catalogo')}>
             {tr('explore')} <ArrowRight size={18} />
           </Link>
-          <Link className="button ghost" to="/#ofertas">
+          <Link className="button ghost" to={path('/#ofertas')}>
             {tr('heroOffers')}
           </Link>
         </div>
@@ -101,7 +103,7 @@ const CATEGORY_CARDS: { category: Category; blurbKey: UiKey }[] = [
 ]
 
 function CategoryShowcase() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   const { products } = useStoreData()
   const imageFor = (category: Category) => products.find(p => p.category === category)?.image
   return (
@@ -118,7 +120,7 @@ function CategoryShowcase() {
       <div className="category-showcase">
         {CATEGORY_CARDS.map((card, index) => (
           <Reveal key={card.category} delay={index * 90}>
-            <Link to={`/catalogo?cat=${card.category}`} className="category-card">
+            <Link to={`${path('/catalogo')}?cat=${card.category}`} className="category-card">
               {imageFor(card.category) && (
                 <img src={resolveImage(imageFor(card.category)!)} alt={tr(card.category)} loading="lazy" />
               )}
@@ -138,7 +140,7 @@ function CategoryShowcase() {
 }
 
 function OffersSection() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   const { products, loading } = useStoreData()
   const offers = products.filter(p => p.originalPrice && p.originalPrice > p.price).slice(0, 4)
   if (!loading && !offers.length) return null
@@ -153,7 +155,7 @@ function OffersSection() {
             <h2>{tr('offersTitle')}</h2>
             <p>{tr('offersBody')}</p>
           </div>
-          <Link to="/catalogo" className="text-link">
+          <Link to={path('/catalogo')} className="text-link">
             {tr('offersCta')} <ArrowRight size={16} />
           </Link>
         </div>
@@ -170,7 +172,7 @@ function OffersSection() {
 }
 
 function FeaturedSection() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   const { products, loading } = useStoreData()
   const featured = products.filter(p => p.featured).slice(0, 5)
   return (
@@ -182,7 +184,7 @@ function FeaturedSection() {
             <h2>{tr('featured')}</h2>
             <p>{tr('featuredBody')}</p>
           </div>
-          <Link to="/catalogo" className="text-link">
+          <Link to={path('/catalogo')} className="text-link">
             {tr('viewAll')} <ArrowRight size={16} />
           </Link>
         </div>
@@ -199,7 +201,7 @@ function FeaturedSection() {
 }
 
 function HowSection() {
-  const { tr } = useLocale()
+  const { tr, path } = useLocale()
   const steps: [string, UiKey, UiKey][] = [
     ['01', 'step1', 'step1b'],
     ['02', 'step2', 'step2b'],
@@ -211,7 +213,7 @@ function HowSection() {
         <span className="kicker light">{tr('howKicker')}</span>
         <h2>{tr('howTitle')}</h2>
         <p>{tr('howBody')}</p>
-        <Link to="/catalogo" className="button gold">
+        <Link to={path('/catalogo')} className="button gold">
           {tr('reserve')} <ArrowRight size={18} />
         </Link>
       </Reveal>
@@ -307,12 +309,9 @@ function VisitSection() {
           <p>
             <Clock3 />
             {tr('visitDays')}
-            <br />
-            12:00 — 20:00 (AR)
           </p>
         </div>
       </Reveal>
     </section>
   )
 }
-

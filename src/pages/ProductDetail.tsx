@@ -9,7 +9,7 @@ import NotFound from './NotFound'
 export default function ProductDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { locale, tr } = useLocale()
+  const { locale, tr, path } = useLocale()
   const { products, loading } = useStoreData()
   const { add } = useCart()
   const [quantity, setQuantity] = useState(1)
@@ -27,7 +27,7 @@ export default function ProductDetail() {
 
   const addAndGo = () => {
     add(product.id, quantity)
-    navigate('/seleccion')
+    navigate(path('/seleccion'))
   }
 
   return (
@@ -43,11 +43,13 @@ export default function ProductDetail() {
           <span className="brand-name">{product.brand}</span>
           <h1>{product.name}</h1>
           <p className="product-subtitle">{product.subtitle[locale]}</p>
-          <div className="detail-price">
-            <small>USD</small>
-            <strong>{product.price}</strong>
-            {product.originalPrice && <del>USD {product.originalPrice}</del>}
-          </div>
+          {RESERVAS_ENABLED && (
+            <div className="detail-price">
+              <small>USD</small>
+              <strong>{product.price}</strong>
+              {product.originalPrice && <del>USD {product.originalPrice}</del>}
+            </div>
+          )}
           {RESERVAS_ENABLED && (
             <div className="availability big">
               <i className={product.stock < 5 ? 'low' : ''} />

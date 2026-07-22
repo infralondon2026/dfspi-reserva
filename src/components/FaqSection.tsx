@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { ArrowRight, Plus } from 'lucide-react'
 import { useLocale } from '../context/AppContext'
 import { faqs } from '../data'
@@ -16,9 +15,9 @@ export default function FaqSection() {
             <span className="kicker">FAQ</span>
             <h2>{tr('faqHeadTitle')}</h2>
           </div>
-          <Link to="/mi-reserva" className="text-link">
+          <a href="mailto:info@dfspi.com" className="text-link">
             {tr('faqCta')} <ArrowRight />
-          </Link>
+          </a>
         </div>
       </Reveal>
       <Reveal>

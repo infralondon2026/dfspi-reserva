@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard'
+import { RESERVAS_ENABLED } from '../config'
 import { useLocale, useStoreData } from '../context/AppContext'
 import type { UiKey } from '../i18n'
 import type { Category, Product } from '../types'
@@ -32,6 +33,7 @@ export default function Catalog() {
   const [params, setParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<SortMode>('recommended')
+  const availableSorts = RESERVAS_ENABLED ? SORTS : SORTS.filter(([id]) => id === 'recommended')
 
   const rawCategory = params.get('cat')
   const category: CategoryFilter = CATEGORIES.some(([id]) => id === rawCategory)
@@ -95,7 +97,7 @@ export default function Catalog() {
         <label className="sort-select">
           {tr('sortLabel')}
           <select value={sort} onChange={event => setSort(event.target.value as SortMode)}>
-            {SORTS.map(([id, key]) => (
+            {availableSorts.map(([id, key]) => (
               <option key={id} value={id}>
                 {tr(key)}
               </option>

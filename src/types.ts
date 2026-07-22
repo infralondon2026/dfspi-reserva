@@ -1,4 +1,4 @@
-export type Locale = 'es' | 'pt'
+export type Locale = 'es' | 'pt' | 'en'
 export type Category = 'perfumes' | 'bebidas' | 'delicatessen' | 'tecnologia'
 export interface Product { id:string; brand:string; name:string; subtitle:Record<Locale,string>; category:Category; image:string; price:number; originalPrice?:number; stock:number; featured?:boolean; volume?:string; description:Record<Locale,string> }
 export interface CartItem { productId:string; quantity:number }

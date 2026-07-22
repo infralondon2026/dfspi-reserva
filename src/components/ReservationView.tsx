@@ -21,7 +21,7 @@ export default function ReservationView({ reservation }: { reservation: Reservat
       <p>
         <Clock3 size={18} />{' '}
         {new Date(reservation.pickupDate + 'T12:00:00').toLocaleDateString(
-          locale === 'es' ? 'es-AR' : 'pt-BR',
+          locale === 'es' ? 'es-AR' : locale === 'pt' ? 'pt-BR' : 'en-US',
           { dateStyle: 'long' },
         )}
       </p>
