@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Search } from 'lucide-react'
+import { Info, Search } from 'lucide-react'
 import ProductCard, { ProductCardSkeleton } from '../components/ProductCard'
 import { RESERVAS_ENABLED } from '../config'
 import { useLocale, useStoreData } from '../context/AppContext'
@@ -69,6 +69,12 @@ export default function Catalog() {
         <h1>{tr('catalogTitle')}</h1>
         <p>{tr('catalogBody')}</p>
       </div>
+      {!RESERVAS_ENABLED && (
+        <div className="catalog-mode-note" role="note">
+          <Info aria-hidden="true" />
+          <p>{tr('catalogNotice')}</p>
+        </div>
+      )}
       <div className="catalog-tools">
         <label className="search">
           <Search />
@@ -94,16 +100,18 @@ export default function Catalog() {
         <span>
           {filtered.length} {tr('productsWord')}
         </span>
-        <label className="sort-select">
-          {tr('sortLabel')}
-          <select value={sort} onChange={event => setSort(event.target.value as SortMode)}>
-            {availableSorts.map(([id, key]) => (
-              <option key={id} value={id}>
-                {tr(key)}
-              </option>
-            ))}
-          </select>
-        </label>
+        {RESERVAS_ENABLED && (
+          <label className="sort-select">
+            {tr('sortLabel')}
+            <select value={sort} onChange={event => setSort(event.target.value as SortMode)}>
+              {availableSorts.map(([id, key]) => (
+                <option key={id} value={id}>
+                  {tr(key)}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
       </div>
       <div className="product-grid catalog-grid">
         {loading

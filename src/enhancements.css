@@ -659,6 +659,29 @@
 
 /* --- Product detail: in-store availability (showcase mode) ----------------- */
 
+.catalog-mode-note {
+  margin: -18px 0 34px;
+  padding: 17px 20px;
+  border-left: 3px solid var(--brand-yellow);
+  background: color-mix(in srgb, var(--brand-yellow) 12%, #fff);
+  color: var(--navy);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.catalog-mode-note svg {
+  width: 20px;
+  min-width: 20px;
+  margin-top: 1px;
+}
+
+.catalog-mode-note p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 .detail-instore {
   margin-top: 8px;
 }

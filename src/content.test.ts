@@ -25,6 +25,8 @@ describe('public informational content', () => {
     expect(reservationFaq?.answer.pt).toContain('não contamos')
     expect(reservationFaq?.answer.en).toContain('not currently available')
     expect(RESERVAS_ENABLED).toBe(false)
+    expect(ui.es.catalogKicker).toBe('CATÁLOGO INFORMATIVO')
+    expect(ui.es.catalogNotice).toContain('No permite compras ni reservas online')
   })
 
   it('has a complete public UI dictionary for English', () => {
