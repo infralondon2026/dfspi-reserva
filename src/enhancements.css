@@ -131,6 +131,61 @@
   border-bottom: 1px solid #dfe3e6;
 }
 
+/* --- Controlled conversational FAQ assistant ----------------------------- */
+
+.chat .message {
+  white-space: pre-line;
+}
+
+.chat .suggestions {
+  margin-bottom: 12px;
+}
+
+.chat .suggestions button,
+.chat-topics button {
+  line-height: 1.35;
+  text-align: left;
+}
+
+.chat-topics-toggle {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid #d8dde1;
+  background: #fff;
+  color: #435365;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.chat-topics-toggle .open {
+  transform: rotate(180deg);
+}
+
+.chat-topics {
+  display: grid;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.chat-topics button {
+  padding: 9px 10px;
+  border: 0;
+  border-left: 2px solid var(--brand-yellow);
+  background: #fff;
+  color: #33465a;
+  font-size: 11px;
+}
+
+.chat-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 @media (max-width: 860px) {
   /* mobile dropdown sits on the same brand blue */
   .header .nav.open {

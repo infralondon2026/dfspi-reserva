@@ -1,36 +1,55 @@
-import { useEffect, useState } from 'react'
-import { Bot, Send, ShieldCheck, X } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Bot, ChevronDown, List, Send, ShieldCheck, X } from 'lucide-react'
+import { getChatReply, initialChatReply } from '../chatEngine'
 import { useLocale } from '../context/AppContext'
 import { faqs } from '../data'
 
 interface Message {
   from: 'bot' | 'user'
   text: string
+  suggestions?: string[]
 }
 
 export default function Chat() {
   const { locale, tr } = useLocale()
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([{ from: 'bot', text: tr('chatGreeting') }])
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const initial = initialChatReply(locale)
+    return [{ from: 'bot', text: initial.text, suggestions: initial.suggestions }]
+  })
   const [text, setText] = useState('')
+  const [lastFaqId, setLastFaqId] = useState<string>()
+  const [showTopics, setShowTopics] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMessages([{ from: 'bot', text: tr('chatGreeting') }])
-  }, [tr])
+    const initial = initialChatReply(locale)
+    setMessages([{ from: 'bot', text: initial.text, suggestions: initial.suggestions }])
+    setLastFaqId(undefined)
+    setShowTopics(false)
+  }, [locale])
+
+  useEffect(() => {
+    if (open) bottomRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'end' })
+  }, [messages, open, showTopics])
+
+  const latestSuggestions = useMemo(
+    () => [...messages].reverse().find(message => message.from === 'bot')?.suggestions ?? [],
+    [messages],
+  )
 
   const reply = (value: string) => {
-    if (!value.trim()) return
-    const normalized = value
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-    const found = faqs.find(faq => faq.keywords[locale].some(k => normalized.includes(k)))
+    const clean = value.trim()
+    if (!clean) return
+    const response = getChatReply(clean, locale, { lastFaqId })
+    if (response.faqId) setLastFaqId(response.faqId)
     setMessages(current => [
       ...current,
-      { from: 'user', text: value },
-      { from: 'bot', text: found ? found.answer[locale] : tr('fallback') },
+      { from: 'user', text: clean },
+      { from: 'bot', text: response.text, suggestions: response.suggestions },
     ])
     setText('')
+    setShowTopics(false)
   }
 
   return (
@@ -40,7 +59,7 @@ export default function Chat() {
         <span>{tr('chatNeedHelp')}</span>
       </button>
       {open && (
-        <aside className="chat">
+        <aside className="chat" aria-label={tr('chatAssistant')}>
           <div className="chat-head">
             <div>
               <Bot />
@@ -55,21 +74,37 @@ export default function Chat() {
               <X />
             </button>
           </div>
-          <div className="chat-body">
+          <div className="chat-body" aria-live="polite">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.from}`}>
                 {message.text}
               </div>
             ))}
-            {messages.length < 3 && (
+
+            {latestSuggestions.length > 0 && !showTopics && (
               <div className="suggestions">
-                {faqs.slice(0, 3).map(faq => (
+                {latestSuggestions.map(question => (
+                  <button key={question} onClick={() => reply(question)}>
+                    {question}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <button className="chat-topics-toggle" type="button" onClick={() => setShowTopics(current => !current)}>
+              <List size={15} /> {tr('chatTopics')} <ChevronDown className={showTopics ? 'open' : ''} size={15} />
+            </button>
+
+            {showTopics && (
+              <div className="chat-topics">
+                {faqs.map(faq => (
                   <button key={faq.id} onClick={() => reply(faq.question[locale])}>
                     {faq.question[locale]}
                   </button>
                 ))}
               </div>
             )}
+            <div ref={bottomRef} />
           </div>
           <form
             className="chat-form"
@@ -78,8 +113,14 @@ export default function Chat() {
               reply(text)
             }}
           >
-            <input value={text} onChange={event => setText(event.target.value)} placeholder={tr('ask')} />
-            <button aria-label={tr('send')}>
+            <input
+              value={text}
+              onChange={event => setText(event.target.value)}
+              placeholder={tr('ask')}
+              aria-label={tr('ask')}
+              autoComplete="off"
+            />
+            <button type="submit" aria-label={tr('send')} disabled={!text.trim()}>
               <Send />
             </button>
           </form>

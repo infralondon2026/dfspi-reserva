@@ -30,4 +30,29 @@ describe('localized public app', () => {
       expect(document.querySelector('#seo-jsonld')?.textContent).toContain('FAQPage')
     })
   })
+
+  it('keeps a controlled FAQ conversation in the chat UI', () => {
+    render(
+      <MemoryRouter initialEntries={['/es/']}>
+        <App />
+      </MemoryRouter>,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Ayuda' }))
+    const input = screen.getByRole('textbox', { name: 'Escribí tu consulta...' })
+    const send = screen.getByRole('button', { name: 'Enviar' })
+
+    fireEvent.change(input, { target: { value: 'hola' } })
+    fireEvent.click(send)
+    expect(screen.getAllByText(/Puedo ayudarte con horarios/i).length).toBeGreaterThan(0)
+    expect(screen.queryByText(/No entendí del todo/i)).toBeNull()
+
+    fireEvent.change(input, { target: { value: '¿A qué hora abren los viernes?' } })
+    fireEvent.click(send)
+    expect(screen.getAllByText(/viernes y sábados de 12:00 a 21:00/i).length).toBeGreaterThan(0)
+
+    fireEvent.change(input, { target: { value: '¿Y los sábados?' } })
+    fireEvent.click(send)
+    expect(screen.getAllByText(/viernes y sábados de 12:00 a 21:00/i).length).toBeGreaterThan(1)
+  })
 })
