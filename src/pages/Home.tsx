@@ -45,7 +45,12 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-media">
-        <img src={hero} alt="Experiencia Duty Free" />
+        <img
+          src={hero}
+          alt="Duty Free Shop Puerto Iguazú al atardecer"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="hero-shade" />
       </div>
       <div className="hero-content">

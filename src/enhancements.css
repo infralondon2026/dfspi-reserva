@@ -242,6 +242,13 @@
 
 .hero-media img {
   animation: hero-zoom 12s ease-out forwards;
+  object-position: center 54%;
+}
+
+@media (max-width: 760px) {
+  .hero-media img {
+    object-position: 66% 54%;
+  }
 }
 
 @keyframes hero-zoom {

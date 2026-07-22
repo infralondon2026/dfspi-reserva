@@ -9,7 +9,7 @@ export const resolveImage = (url: string) => (url.startsWith('http') ? url : ass
 
 export const logo = asset('img/logo.png')
 
-export const hero = asset('img/hero.jpg')
+export const hero = asset('img/portada-web.jpeg')
 
 export const storeAddress = 'Ruta Nacional 12, km 1645,5'
 export const storeCity = 'Puerto Iguazú, Misiones'
