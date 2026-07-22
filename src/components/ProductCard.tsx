@@ -1,37 +1,44 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ArrowRight, Check, Heart, Plus } from 'lucide-react'
-import { resolveImage } from '../assets'
-import { RESERVAS_ENABLED } from '../config'
-import { useCart, useLocale } from '../context/AppContext'
-import type { Product } from '../types'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Check, Heart, Plus } from "lucide-react";
+import { resolveImage } from "../assets";
+import { RESERVAS_ENABLED } from "../config";
+import { useCart, useLocale } from "../context/AppContext";
+import type { Product } from "../types";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { locale, tr, path } = useLocale()
-  const { add, favorites, toggleFavorite } = useCart()
-  const [done, setDone] = useState(false)
-  const favorite = favorites.includes(product.id)
+  const { locale, tr, path } = useLocale();
+  const { add, favorites, toggleFavorite } = useCart();
+  const [done, setDone] = useState(false);
+  const favorite = favorites.includes(product.id);
+  const detailPath = path(`/producto/${product.slug || product.id}`);
 
   const handleAdd = () => {
-    add(product.id)
-    setDone(true)
-    setTimeout(() => setDone(false), 1200)
-  }
+    add(product.id);
+    setDone(true);
+    setTimeout(() => setDone(false), 1200);
+  };
 
   return (
     <article className="product-card">
       <div className="product-image">
-        <Link to={path(`/producto/${product.id}`)}>
-          <img src={resolveImage(product.image)} alt={`${product.brand} ${product.name}`} loading="lazy" />
+        <Link to={detailPath}>
+          <img
+            src={resolveImage(product.image)}
+            alt={`${product.brand} ${product.name}`}
+            loading="lazy"
+          />
         </Link>
         {RESERVAS_ENABLED && product.originalPrice && (
-          <span className="sale">-{Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
+          <span className="sale">
+            -{Math.round((1 - product.price / product.originalPrice) * 100)}%
+          </span>
         )}
         {RESERVAS_ENABLED && (
           <button
-            className={favorite ? 'heart active' : 'heart'}
+            className={favorite ? "heart active" : "heart"}
             onClick={() => toggleFavorite(product.id)}
-            aria-label={tr('favorite')}
+            aria-label={tr("favorite")}
           >
             <Heart size={19} />
           </button>
@@ -39,14 +46,14 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="product-info">
         <span className="brand-name">{product.brand}</span>
-        <Link to={path(`/producto/${product.id}`)}>
+        <Link to={detailPath}>
           <h3>{product.name}</h3>
         </Link>
         <p>{product.subtitle[locale]}</p>
         {RESERVAS_ENABLED && (
           <div className="availability">
-            <i className={product.stock < 5 ? 'low' : ''} />
-            {product.stock < 5 ? tr('lastUnits') : tr('available')}
+            <i className={product.stock < 5 ? "low" : ""} />
+            {product.stock < 5 ? tr("lastUnits") : tr("available")}
           </div>
         )}
         <div className="product-bottom">
@@ -57,23 +64,30 @@ export default function ProductCard({ product }: { product: Product }) {
               {product.originalPrice && <del>${product.originalPrice}</del>}
             </div>
           ) : (
-            <span className="catalog-store-only">{tr('inStoreOnly')}</span>
+            <span className="catalog-store-only">{tr("inStoreOnly")}</span>
           )}
           {RESERVAS_ENABLED ? (
-            <button onClick={handleAdd} className={done ? 'add-button done' : 'add-button'}>
+            <button
+              onClick={handleAdd}
+              className={done ? "add-button done" : "add-button"}
+            >
               {done ? <Check size={19} /> : <Plus size={19} />}
-              <span>{done ? tr('added') : tr('add')}</span>
+              <span>{done ? tr("added") : tr("add")}</span>
             </button>
           ) : (
-            <Link to={path(`/producto/${product.id}`)} className="add-button ghost-link" aria-label={tr('details')}>
-              <span>{tr('details')}</span>
+            <Link
+              to={detailPath}
+              className="add-button ghost-link"
+              aria-label={tr("details")}
+            >
+              <span>{tr("details")}</span>
               <ArrowRight size={17} />
             </Link>
           )}
         </div>
       </div>
     </article>
-  )
+  );
 }
 
 /** Placeholder card shown while the catalog loads. */
@@ -87,5 +101,5 @@ export function ProductCardSkeleton() {
         <span className="skeleton-line w60" />
       </div>
     </article>
-  )
+  );
 }
