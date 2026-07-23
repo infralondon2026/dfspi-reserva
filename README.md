@@ -1,6 +1,8 @@
-# DFSPI Reserva
+# DFSPI
 
-Sitio bilingüe (ES/PT) de catálogo y reserva para Duty Free Shop Puerto Iguazú. Incluye catálogo, favoritos, selección, checkout sin pago, código QR, consulta de reserva, chatbot FAQ controlado y panel de operaciones.
+Sitio informativo trilingüe (ES/PT/EN) del Duty Free Shop Puerto Iguazú: catálogo de vidriera, ofertas, mapa interactivo de la tienda, servicios, medios de pago, novedades y newsletter. El circuito de reserva está incluido pero oculto tras un flag (`RESERVAS_ENABLED`), reactivable a futuro.
+
+> 👥 **¿Vas a colaborar en el repo?** Leé primero la [guía de colaboración](CONTRIBUTING.md): `main` está protegida y todo cambio entra por Pull Request.
 
 ## Ejecutar
 
