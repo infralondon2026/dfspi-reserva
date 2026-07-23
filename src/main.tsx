@@ -15,3 +15,12 @@ createRoot(document.getElementById('root')!).render(
     </BrowserRouter>
   </StrictMode>,
 )
+
+// PWA: registrar el service worker solo en producción (en dev interferiría con HMR).
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
+      /* si el registro falla, el sitio sigue funcionando sin PWA */
+    })
+  })
+}
